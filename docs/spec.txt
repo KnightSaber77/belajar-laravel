@@ -1,0 +1,70 @@
+Master Plan Pulta
+
+Routes
+
+Bagian Interface User
+=====
+pulta.oo                    -> sebagai home
+pulta.oo/transaksi          -> menampilkan detail transaksi beserta ID nya
+pulta.oo/detail             -> menampilkan detail transaksi setelah proses pembayaran
+pulta.oo/lacak              -> meminta form id guna keperluan pengecekan transaksi
+pulta.oo/status/{id}        -> menampilkan status transaksi yang ada (sudah dibayar) dan kondisi apakah pulsa sudah masuk atau belum
+=====
+
+Bagian Admin
+=====
+pulta.oo/admin                         -> home tempat admin login
+pulta.oo/admin/systems                 -> tempat membuat situs maintenance / tidak
+pulta.oo/admin/payments                -> menampilkan list transaksi yang sedang terjadi dilengkapi dengan statusnya
+pulta.oo/admin/payments/{id}           -> menampilkan transaksi yang lebih rinci pada {id} yang diklik
+
+pulta.oo/admin/provider                -> menampilkan list provider yang sudah ada
+pulta.oo/admin/provider/new            -> meminta form untuk menambah provider
+pulta.oo/admin/provider/edit           -> mengedit data provider yang sudah ada menjadi baru
+pulta.oo/admin/provider/delete         -> menghapus data provider yang diajukan
+
+pulta.oo/admin/products                -> menampilkan list product yang sudah ada
+pulta.oo/admin/products/new            -> meminta form untuk menambah product
+pulta.oo/admin/products/edit           -> mengedit data product yang sudah ada menjadi baru
+pulta.oo/admin/products/delete         -> menghapus data product yang diajukan
+
+pulta.oo/admin/user                    -> menampilkan list data user yang sudah ada
+pulta.oo/admin/user/new                -> meminta form untuk menambah user
+pulta.oo/admin/user/edit               -> mengedit data user yang sudah ada menjadi baru
+pulta.oo/admin/user/delete             -> menghapus data user yang diajukan
+
+pulta.oo/payment_center                -> meminta form untuk mengganti database pembayaran
+pulta.oo/payment_center/{id}           -> mengganti status database pembayaran
+=====
+
+Database
+
+*admin
+username <primary_key>
+password
+description
+
+*provider
+providerid <primary_key>    -> string
+providername                -> string
+logo                        -> string
+
+*product
+productid <primary_key>     -> string
+productname                 -> string
+price                       -> int
+tipe                        -> tinyint(pulsa/data)
+
+*payment
+paymentid <primary_key>     -> string
+date                        -> date
+status                      -> tinyint(paid/waiting for payment/expired)
+total                       -> int
+
+*transaction
+transactionid <primary_key> -> string
+paymentid                   -> string
+nomorhp                     -> string
+product_code                -> string
+status                      -> tinyint(success, pending, failed)
+price                       -> int
