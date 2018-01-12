@@ -38,4 +38,9 @@ class ProviderService {
 
         $this->providerRepository->provideredit($provider);
     }
+
+    public function providerGetOne($id)
+    {
+        return $this->providerRepository->getOne($id);
+    }
 }

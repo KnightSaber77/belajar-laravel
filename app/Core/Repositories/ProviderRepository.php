@@ -27,6 +27,11 @@ class ProviderRepository{
 
     }
 
+    public function getOne($id)
+    {
+        return Provider::find($id);
+    }
+
     public function provideredit($provider){
         $provider->save();
     }

@@ -34,9 +34,6 @@ Route::post('/admin/createnewprovider', 'Core\ProviderController@provideradd');
 
 Route::delete('/admin/provider/{provider}', 'Core\ProviderController@providerdelete');
 
-Route::get('/admin/provider/edit/{id}', function ($id) {
-    $data['provider'] = Provider::find($id);
-    return view('provideredit', $data);
-});
+Route::get('/admin/provider/edit/{id}', 'Core\ProviderController@providerShowOne');
 
 Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@provideredit');

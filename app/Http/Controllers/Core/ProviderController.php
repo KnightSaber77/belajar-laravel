@@ -39,6 +39,12 @@ class ProviderController extends Controller
         return view('provider', $data);
     }
 
+    public function providerShowOne($id)
+    {
+        $data['provider'] = $this->providerService->getOne($id);
+        return view('provideredit', $data);
+    }
+
     public function provideredit($id, Request $request){
         $provider = Provider::find($id);
 
