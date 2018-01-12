@@ -27,4 +27,22 @@ class ProviderController extends Controller
 
         return redirect('admin/provider');
     }
+
+    public function providerdelete(Provider $provider){
+        $this->providerService->providerdelete($provider);
+        return redirect('/admin/provider');
+    }
+
+    public function providershow(){
+        $data['providers'] = Provider::all();
+        $this->providerService->providershow($data);
+        return view('provider', $data);
+    }
+
+    public function provideredit($id, Request $request){
+        $provider = Provider::find($id);
+
+        $this->providerService->provideredit($provider, $request);
+        return redirect('admin/provider');
+    }
 }

@@ -22,4 +22,12 @@ class ProviderRepository{
     public function providerdelete($provider){
         $provider->delete();
     }
+
+    public function providershow($data){
+
+    }
+
+    public function provideredit($provider){
+        $provider->save();
+    }
 }

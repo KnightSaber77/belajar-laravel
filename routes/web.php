@@ -22,10 +22,7 @@ Route::post('/admin/login', 'Core\LoginController@login');
 
 
 //Tampilin List Provider yang ada, menu home provider
-Route::get('/admin/provider', function () {
-    $data['providers'] = Provider::all();
-    return view('provider', $data);
-});
+Route::get('/admin/provider', 'Core\ProviderController@providershow');
 
 //Add Provider
 
@@ -35,22 +32,11 @@ Route::get('/admin/provider/new', function () {
 
 Route::post('/admin/createnewprovider', 'Core\ProviderController@provideradd');
 
-Route::delete('/admin/provider/{provider}', function (Provider $provider) {
-        $provider->delete();
-
-        return redirect('/admin/provider');
-});
+Route::delete('/admin/provider/{provider}', 'Core\ProviderController@providerdelete');
 
 Route::get('/admin/provider/edit/{id}', function ($id) {
     $data['provider'] = Provider::find($id);
     return view('provideredit', $data);
 });
-Route::post('admin/provider/editprovider/{id}', function ($id, Request $request){
-//    dd($request->all());
-    $provider = Provider::find($id);
-    $provider->providername = $request->input('providername');
-    $provider->description = $request->input('description');
 
-    $provider->save();
-    return redirect('admin/provider');
-});
+Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@provideredit');

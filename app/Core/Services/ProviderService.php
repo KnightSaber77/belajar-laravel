@@ -23,4 +23,19 @@ class ProviderService {
 
         $this->providerRepository->provideradd($provider);
     }
+
+    public function providerdelete($provider){
+        $this->providerRepository->providerdelete($provider);
+    }
+
+    public function providershow($data){
+        $this->providerRepository->providershow($data);
+    }
+
+    public function provideredit($provider, $request){
+        $provider->providername = $request->input('providername');
+        $provider->description = $request->input('description');
+
+        $this->providerRepository->provideredit($provider);
+    }
 }
