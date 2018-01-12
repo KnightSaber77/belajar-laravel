@@ -10,36 +10,42 @@ namespace App\Core\Services;
 
 use App\Core\Models\Provider;
 use App\Core\Repositories\ProviderRepository;
+
 class ProviderService {
     private $providerRepository;
-    public function __construct(){
+    public function __construct()
+    {
         $this->providerRepository = new ProviderRepository();
     }
 
-    public function provideradd($providername, $description){
+    public function providerAdd($providerName, $description)
+    {
         $provider = new Provider();
-        $provider->providername = $providername;
+        $provider->provider_name = $providerName;
         $provider->description = $description;
 
-        $this->providerRepository->provideradd($provider);
+        $this->providerRepository->providerAdd($provider);
     }
 
-    public function providerdelete($provider){
-        $this->providerRepository->providerdelete($provider);
+    public function providerDelete($provider)
+    {
+        $this->providerRepository->providerDelete($provider);
     }
 
-    public function providershow($data){
-        $this->providerRepository->providershow($data);
+    public function providerShow($data)
+    {
+        $this->providerRepository->providerShow($data);
     }
 
-    public function provideredit($provider, $request){
-        $provider->providername = $request->input('providername');
+    public function providerEdit($provider, $request)
+    {
+        $provider->provider_name = $request->input('provider_name');
         $provider->description = $request->input('description');
 
-        $this->providerRepository->provideredit($provider);
+        $this->providerRepository->providerUpdate($provider);
     }
 
-    public function providerGetOne($id)
+    public function getOne($id)
     {
         return $this->providerRepository->getOne($id);
     }

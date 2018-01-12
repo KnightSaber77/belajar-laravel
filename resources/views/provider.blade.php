@@ -54,7 +54,7 @@
                                 </td>
 
                                 <td class="hidden-xs">{{$provider->id}}</td>
-                                <td>{{ $provider->providername}}</td>
+                                <td>{{ $provider->provider_name}}</td>
                                 <td>{{ $provider->description}}</td>
                             </tr>
                         @endforeach

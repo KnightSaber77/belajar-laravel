@@ -14,21 +14,13 @@
 use App\Core\Models\Provider;
 use Illuminate\Http\Request;
 
-Route::get('/admin', function () {
-    return view('login');
-});
+Route::get('/admin', 'Core\LoginController@showLayout');
 
 Route::post('/admin/login', 'Core\LoginController@login');
 
-
-//Tampilin List Provider yang ada, menu home provider
 Route::get('/admin/provider', 'Core\ProviderController@providershow');
 
-//Add Provider
-
-Route::get('/admin/provider/new', function () {
-    return view('providernew');
-});
+Route::get('/admin/provider/new', 'Core\ProviderController@showNew');
 
 Route::post('/admin/createnewprovider', 'Core\ProviderController@provideradd');
 
@@ -36,4 +28,4 @@ Route::delete('/admin/provider/{provider}', 'Core\ProviderController@providerdel
 
 Route::get('/admin/provider/edit/{id}', 'Core\ProviderController@providerShowOne');
 
-Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@provideredit');
+Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@providerEdit');

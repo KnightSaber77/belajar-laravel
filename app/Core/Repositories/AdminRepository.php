@@ -11,7 +11,8 @@ namespace App\Core\Repositories;
 use App\Core\Models\Admin;
 
 class AdminRepository{
-    public function getByUsernameAndPassword($username, $password){
+    public function getByUsernameAndPassword($username, $password)
+    {
         return Admin::where([
             ['username', '=', $username],
             ['password', '=', $password]

@@ -9,16 +9,19 @@
 namespace App\Core\Services;
 
 use App\Core\Repositories\AdminRepository;
+
 class LoginService {
 
     private $adminRepository;
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->adminRepository = new AdminRepository();
-//        parent::__construct();
     }
 
 
-    public function login($username, $password){
+    public function login($username, $password)
+    {
         $isAdminExist = $this->adminRepository->getByUsernameAndPassword($username, $password);
         return $isAdminExist;
     }

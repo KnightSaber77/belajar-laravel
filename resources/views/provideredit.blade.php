@@ -9,10 +9,10 @@
 
             <!-- Task Name -->
             <div class="form-group">
-                <label for="providername" class="col-sm-3 control-label">Provider Name</label>
+                <label for="provider_name" class="col-sm-3 control-label">Provider Name</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="providername" id="providername" class="form-control" value="{{$provider->providername}}">
+                    <input type="text" name="provider_name" id="provider_name" class="form-control" value="{{$provider->provider_name}}">
                 </div>
                 <br>
                 <br>

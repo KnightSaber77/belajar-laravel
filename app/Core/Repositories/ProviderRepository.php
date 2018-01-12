@@ -11,19 +11,23 @@ namespace App\Core\Repositories;
 use App\Core\Models\Provider;
 
 class ProviderRepository{
-    public function getAll(){
+    public function getAll()
+    {
         return Provider::get();
     }
 
-    public function provideradd($provider){
+    public function providerAdd($provider)
+    {
         $provider->save();
     }
 
-    public function providerdelete($provider){
+    public function providerDelete($provider)
+    {
         $provider->delete();
     }
 
-    public function providershow($data){
+    public function providerShow($data)
+    {
 
     }
 
@@ -32,7 +36,8 @@ class ProviderRepository{
         return Provider::find($id);
     }
 
-    public function provideredit($provider){
+    public function providerUpdate($provider)
+    {
         $provider->save();
     }
 }

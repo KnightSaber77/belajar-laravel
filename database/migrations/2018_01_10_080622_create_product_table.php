@@ -14,14 +14,14 @@ class CreateProductTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->string('productname')->unique();
-            $table->integer('providerid')->unsigned();
+            $table->string('product_name')->unique();
+            $table->integer('provider_id')->unsigned();
             $table->integer('price');
             $table->tinyinteger('tipe');
             $table->timestamps();
 
 //            $table->primary('id');
-            $table->foreign('providerid')->references('id')->on('providers');
+            $table->foreign('provider_id')->references('id')->on('providers');
         });
     }
 

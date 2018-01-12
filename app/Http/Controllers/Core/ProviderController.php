@@ -13,29 +13,32 @@ use App\Core\Services\ProviderService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProviderController extends Controller
-{
+class ProviderController extends Controller {
     private $providerService;
-    public function __construct() {
+    public function __construct()
+    {
         $this->providerService = new ProviderService();
     }
 
-    public function provideradd(Request $request){
-        $providername = $request->input('providername');
+    public function providerAdd(Request $request)
+    {
+        $providerName = $request->input('provider_name');
         $description = $request->input('description');
-        $this->providerService->provideradd($providername, $description);
+        $this->providerService->provideradd($providerName, $description);
 
         return redirect('admin/provider');
     }
 
-    public function providerdelete(Provider $provider){
-        $this->providerService->providerdelete($provider);
+    public function providerDelete(Provider $provider)
+    {
+        $this->providerService->providerDelete($provider);
         return redirect('/admin/provider');
     }
 
-    public function providershow(){
+    public function providerShow()
+    {
         $data['providers'] = Provider::all();
-        $this->providerService->providershow($data);
+        $this->providerService->providerShow($data);
         return view('provider', $data);
     }
 
@@ -45,10 +48,16 @@ class ProviderController extends Controller
         return view('provideredit', $data);
     }
 
-    public function provideredit($id, Request $request){
+    public function showNew()
+    {
+        return view('providernew');
+    }
+
+    public function providerEdit($id, Request $request)
+    {
         $provider = Provider::find($id);
 
-        $this->providerService->provideredit($provider, $request);
+        $this->providerService->providerEdit($provider, $request);
         return redirect('admin/provider');
     }
 }
