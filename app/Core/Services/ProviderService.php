@@ -32,10 +32,7 @@ class ProviderService {
         $this->providerRepository->providerDelete($provider);
     }
 
-    public function providerShow($data)
-    {
-        $this->providerRepository->providerShow($data);
-    }
+
 
     public function providerEdit($provider, $request)
     {
@@ -45,8 +42,8 @@ class ProviderService {
         $this->providerRepository->providerUpdate($provider);
     }
 
-    public function getOne($id)
+    public function providerGetOne($id)
     {
-        return $this->providerRepository->getOne($id);
+        return $this->providerRepository->providerGetOne($id);
     }
 }

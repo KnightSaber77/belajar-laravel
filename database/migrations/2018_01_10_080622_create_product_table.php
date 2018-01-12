@@ -20,7 +20,6 @@ class CreateProductTable extends Migration
             $table->tinyinteger('tipe');
             $table->timestamps();
 
-//            $table->primary('id');
             $table->foreign('provider_id')->references('id')->on('providers');
         });
     }

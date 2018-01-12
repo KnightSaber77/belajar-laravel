@@ -18,8 +18,6 @@ class CreateProviderTable extends Migration
             $table->string('provider_name');
             $table->string('description');
             $table->timestamps();
-
-//            $table->primary('id');
         });
     }
 

@@ -11,7 +11,6 @@
                             <h3 class="panel-title">Pulta Admin Provider Panel</h3>
                         </div>
 
-                        {{--<form id="create" action="/admin/provider/new" method="VIEW" class="form-horizontal">--}}
                             <div class="col col-xs-6 text-right">
                                 <a href = "/admin/provider/new">
                                     <button type="submit" class="btn btn-default">
@@ -19,7 +18,6 @@
                                     </button>
                                 </a>
                             </div>
-                        {{--</form>--}}
 
                     </div>
                 </div>

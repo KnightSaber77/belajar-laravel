@@ -24,7 +24,7 @@ class ProviderController extends Controller {
     {
         $providerName = $request->input('provider_name');
         $description = $request->input('description');
-        $this->providerService->provideradd($providerName, $description);
+        $this->providerService->providerAdd($providerName, $description);
 
         return redirect('admin/provider');
     }
@@ -38,19 +38,18 @@ class ProviderController extends Controller {
     public function providerShow()
     {
         $data['providers'] = Provider::all();
-        $this->providerService->providerShow($data);
         return view('provider', $data);
     }
 
     public function providerShowOne($id)
     {
         $data['provider'] = $this->providerService->getOne($id);
-        return view('provideredit', $data);
+        return view('provider_edit', $data);
     }
 
     public function showNew()
     {
-        return view('providernew');
+        return view('provider_new');
     }
 
     public function providerEdit($id, Request $request)

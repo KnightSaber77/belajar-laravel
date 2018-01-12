@@ -11,9 +11,6 @@
 |
 */
 
-use App\Core\Models\Provider;
-use Illuminate\Http\Request;
-
 Route::get('/admin', 'Core\LoginController@showLayout');
 
 Route::post('/admin/login', 'Core\LoginController@login');

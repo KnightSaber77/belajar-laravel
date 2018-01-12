@@ -22,7 +22,6 @@ class CreateTransactionTable extends Migration
             $table->integer('price');
             $table->timestamps();
 
-//            $table->primary('id');
             $table->foreign('payment_id')->references('payment_id')->on('payments');
         });
     }

@@ -10,7 +10,7 @@ namespace App\Core\Repositories;
 
 use App\Core\Models\Provider;
 
-class ProviderRepository{
+class ProviderRepository {
     public function getAll()
     {
         return Provider::get();
@@ -26,12 +26,7 @@ class ProviderRepository{
         $provider->delete();
     }
 
-    public function providerShow($data)
-    {
-
-    }
-
-    public function getOne($id)
+    public function providerGetOne($id)
     {
         return Provider::find($id);
     }

@@ -18,7 +18,6 @@ class CreatePaymentTable extends Migration
             $table->tinyinteger('status');
             $table->integer('total');
             $table->timestamps();
-
         });
     }
 
