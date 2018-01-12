@@ -11,7 +11,8 @@ namespace App\Core\Services;
 use App\Core\Models\Provider;
 use App\Core\Repositories\ProviderRepository;
 
-class ProviderService {
+class ProviderService
+{
     private $providerRepository;
     public function __construct()
     {

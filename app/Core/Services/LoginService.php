@@ -10,7 +10,8 @@ namespace App\Core\Services;
 
 use App\Core\Repositories\AdminRepository;
 
-class LoginService {
+class LoginService
+{
 
     private $adminRepository;
 
