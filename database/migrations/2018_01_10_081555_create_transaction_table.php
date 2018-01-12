@@ -15,15 +15,14 @@ class CreateTransactionTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('paymentid');
-            $table->string('nomorhp');
-            $table->string('productname');
+            $table->string('payment_id');
+            $table->string('nomor_hp');
+            $table->string('product_name');
             $table->tinyInteger('status');
             $table->integer('price');
             $table->timestamps();
 
-//            $table->primary('id');
-            $table->foreign('paymentid')->references('paymentid')->on('payments');
+            $table->foreign('payment_id')->references('payment_id')->on('payments');
         });
     }
 
