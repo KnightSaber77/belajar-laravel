@@ -38,13 +38,16 @@
                         @foreach ($providers as $provider)
                             <tr>
                                 <td align="center">
-
-                                    <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
+                                    <form action="{{'/admin/provider/edit/'.$provider->id}}" method=""POST>
+                                        <button type="submit" class="btn btn-default">
+                                            <a><em class="fa fa-pencil"></em></a>
+                                        </button>
+                                    </form>
                                     <form action="{{ url('admin/provider/'.$provider->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">
-                                            <a class><em class="fa fa-trash"></em></a>
+                                            <a><em class="fa fa-trash"></em></a>
                                         </button>
                                     </form>
                                     {{--ini yang mo buat edit sama delete ntar--}}

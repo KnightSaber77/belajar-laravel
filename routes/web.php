@@ -41,9 +41,16 @@ Route::delete('/admin/provider/{provider}', function (Provider $provider) {
         return redirect('/admin/provider');
 });
 
-Route::get('/admin/provider/edit', function () {
-    return view('provideredit');
+Route::get('/admin/provider/edit/{id}', function ($id) {
+    $data['provider'] = Provider::find($id);
+    return view('provideredit', $data);
 });
-Route::post('admin/provider/editprovider', function (Request $request){
-    //
+Route::post('admin/provider/editprovider/{id}', function ($id, Request $request){
+//    dd($request->all());
+    $provider = Provider::find($id);
+    $provider->providername = $request->input('providername');
+    $provider->description = $request->input('description');
+
+    $provider->save();
+    return redirect('admin/provider');
 });
