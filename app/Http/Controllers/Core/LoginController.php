@@ -27,7 +27,7 @@ class LoginController extends Controller
 
 
         $admin = $this->loginService->login($username, $password);
-        if (empty($admin)){
+        if (empty($admin)) {
             return redirect('/admin');
         }
         return redirect ('/admin/dashboard');
