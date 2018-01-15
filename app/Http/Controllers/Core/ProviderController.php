@@ -44,7 +44,7 @@ class ProviderController extends Controller
 
     public function providerShowOne($id)
     {
-        $data['provider'] = $this->providerService->getOne($id);
+        $data['provider'] = $this->providerService->providerGetOne($id);
         return view('provider_edit', $data);
     }
 

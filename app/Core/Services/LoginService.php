@@ -9,6 +9,7 @@
 namespace App\Core\Services;
 
 use App\Core\Repositories\AdminRepository;
+use Illuminate\Support\Facades\Session;
 
 class LoginService
 {
@@ -23,7 +24,12 @@ class LoginService
 
     public function login($username, $password)
     {
-        $isAdminExist = $this->adminRepository->getByUsernameAndPassword($username, $password);
-        return $isAdminExist;
+        $admin = $this->adminRepository->getByUsernameAndPassword($username, $password);
+
+        if (!empty($admin)) {
+            Session::put('username', $admin->username);
+            Session::save();
+        }
+        return $admin;
     }
 }
