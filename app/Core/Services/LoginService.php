@@ -26,7 +26,7 @@ class LoginService
     {
         $admin = $this->adminRepository->getByUsernameAndPassword($username, $password);
 
-        if (!empty($admin)){
+        if (!empty($admin)) {
             Session::put('username', $admin->username);
             Session::save();
         }
