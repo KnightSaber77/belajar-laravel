@@ -38,47 +38,14 @@ Route::get('/admin/provider/edit/{id}', 'Core\ProviderController@providerShowOne
 
 Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@providerEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/product', function() {
-    $data['products'] = Product::all();
-    $data2['providers'] = Provider::all();
-    return view('product', $data, $data2) ;
-});
+Route::get('admin/product', 'Core\ProductController@productShow')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/product/new', function() {
-    $data['providers'] = Provider::all();
-    return view('product_new', $data) ;
-});
+Route::get('admin/product/new', 'Core\ProductController@productShowNew')->middleware(AdminLoginMiddleware::class);
 
-Route::post('admin/createnewproduct', function(\Illuminate\Http\Request $request){
-    $product = new Product();
-    $product->product_name = $request->product_name;
-    $product->provider_id = $request->provider_id;
-    $product->price = $request->price;
-    $product->tipe = $request->tipe;
+Route::post('admin/createnewproduct', 'Core\ProductController@productAdd')->middleware(AdminLoginMiddleware::class);
 
-    $product->save();
-    return redirect('admin/product');
-});
+Route::delete('/admin/product/delete/{product}', 'Core\ProductController@productDelete')->middleware(AdminLoginMiddleware::class);
 
-Route::delete('/admin/product/delete/{product}', function (Product $product) {
-    $product->delete();
-    return redirect('/admin/product');
-});
+Route::get('admin/product/edit/{product_name}', 'Core\ProductController@productShowEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/product/edit/{product_name}', function($product_name){
-    $data['product'] = Product::find($product_name);
-    $data2['providers'] = Provider::all();
-    return view('product_edit', $data, $data2);
-});
-
-Route::post('admin/product/editproduct/{product_name}', function($product_name, Request $request){
-    $product = Product::find($product_name);
-
-    $product->provider_id = $request->input('provider_id');
-    $product->price = $request->input('price');
-    $product->tipe = $request->input('tipe');
-    $product->product_name = $request->input('product_name');
-
-    $product->save();
-    return redirect('/admin/product');
-});
+Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
