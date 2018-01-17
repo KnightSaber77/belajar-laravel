@@ -41,7 +41,7 @@
                                             <a><em class="fa fa-pencil"></em></a>
                                         </button>
                                     </form>
-                                    <form action="{{ url('admin/provider/'.$provider->id) }}" method="POST">
+                                    <form action="{{ url('admin/provider/delete/'.$provider->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <button type="submit" class="btn btn-danger">

@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('content');
+@section('content')
 
     <div class="container">
         <form action="{{ url('admin/logout') }}" method="GET" class="form-horizontal">

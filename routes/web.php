@@ -11,7 +11,10 @@
 |
 */
 
+use App\Core\Models\Product;
+use App\Core\Models\Provider;
 use App\Http\Middleware\AdminLoginMiddleware;
+use Illuminate\Http\Request;
 
 Route::get('/admin', 'Core\LoginController@showLayout');
 
@@ -29,8 +32,20 @@ Route::get('/admin/provider/new', 'Core\ProviderController@showNew')->middleware
 
 Route::post('/admin/createnewprovider', 'Core\ProviderController@provideradd')->middleware(AdminLoginMiddleware::class);
 
-Route::delete('/admin/provider/{provider}', 'Core\ProviderController@providerdelete')->middleware(AdminLoginMiddleware::class);
+Route::delete('/admin/provider/delete/{provider}', 'Core\ProviderController@providerdelete')->middleware(AdminLoginMiddleware::class);
 
 Route::get('/admin/provider/edit/{id}', 'Core\ProviderController@providerShowOne')->middleware(AdminLoginMiddleware::class);
 
 Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@providerEdit')->middleware(AdminLoginMiddleware::class);
+
+Route::get('admin/product', 'Core\ProductController@productShow')->middleware(AdminLoginMiddleware::class);
+
+Route::get('admin/product/new', 'Core\ProductController@productShowNew')->middleware(AdminLoginMiddleware::class);
+
+Route::post('admin/createnewproduct', 'Core\ProductController@productAdd')->middleware(AdminLoginMiddleware::class);
+
+Route::delete('/admin/product/delete/{product}', 'Core\ProductController@productDelete')->middleware(AdminLoginMiddleware::class);
+
+Route::get('admin/product/edit/{product_name}', 'Core\ProductController@productShowEdit')->middleware(AdminLoginMiddleware::class);
+
+Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);

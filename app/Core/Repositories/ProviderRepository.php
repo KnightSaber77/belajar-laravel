@@ -11,11 +11,6 @@ namespace App\Core\Repositories;
 use App\Core\Models\Provider;
 
 class ProviderRepository {
-    public function getAll()
-    {
-        return Provider::get();
-    }
-
     public function providerAdd($provider)
     {
         $provider->save();
@@ -34,5 +29,10 @@ class ProviderRepository {
     public function providerUpdate($provider)
     {
         $provider->save();
+    }
+
+    public function getAll()
+    {
+        return Provider::all();
     }
 }
