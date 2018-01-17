@@ -44,4 +44,14 @@ class ProductService
 
         $this->productRepository->productUpdate($product);
     }
+
+    public function getAll()
+    {
+        return $this->productRepository->getAll();
+    }
+
+    public function getOne($product_name)
+    {
+        return $this->productRepository->getOne($product_name);
+    }
 }

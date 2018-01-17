@@ -26,4 +26,14 @@ class ProductRepository
     {
         $product->save();
     }
+
+    public function getAll()
+    {
+        return Product::all();
+    }
+
+    public function getOne($product_name)
+    {
+        return Product::find($product_name);
+    }
 }

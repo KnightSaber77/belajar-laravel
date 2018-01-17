@@ -47,4 +47,9 @@ class ProviderService
     {
         return $this->providerRepository->providerGetOne($id);
     }
+
+    public function getAll()
+    {
+        return $this->providerRepository->getAll();
+    }
 }

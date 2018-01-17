@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Core;
 use App\Core\Models\Product;
 use App\Core\Models\Provider;
 use App\Core\Services\ProductService;
+use App\Core\Services\ProviderService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,16 +20,19 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     private $productService;
+    private $providerService;
+
     public function __construct()
     {
         $this->productService = new ProductService();
+        $this->providerService = new ProviderService();
     }
 
     public function productShow()
     {
-        $data['products'] = Product::all();
-        $data2['providers'] = Provider::all();
-        return view('product', $data, $data2) ;
+        $data['products'] = $this->productService->getAll();
+        $data['providers'] = $this->providerService->getAll();
+        return view('product', $data);
     }
     public function productAdd(Request $request)
     {
@@ -49,20 +53,20 @@ class ProductController extends Controller
 
     public function productShowNew()
     {
-        $data['providers'] = Provider::all();
+        $data['providers'] = $this->providerService->getAll();
         return view('product_new', $data);
     }
 
     public function productShowEdit($product_name)
     {
-        $data['product'] = Product::find($product_name);
-        $data2['providers'] = Provider::all();
-        return view('product_edit', $data, $data2);
+        $data['product'] = $this->productService->getOne($product_name);
+        $data['providers'] = $this->providerService->getAll();
+        return view('product_edit', $data);
     }
 
     public function productEdit($product_name, Request $request)
     {
-        $product = Product::find($product_name);
+        $product = $this->productService->getOne($product_name);
 
         $this->productService->productEdit($product, $request);
         return redirect('admin/product');
