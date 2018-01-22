@@ -19,11 +19,12 @@ class ProviderService
         $this->providerRepository = new ProviderRepository();
     }
 
-    public function providerAdd($providerName, $description)
+    public function providerAdd($providerName, $description, $prefixes)
     {
         $provider = new Provider();
         $provider->provider_name = $providerName;
         $provider->description = $description;
+        $provider->prefixes = $prefixes;
 
         $this->providerRepository->providerAdd($provider);
     }
@@ -39,6 +40,7 @@ class ProviderService
     {
         $provider->provider_name = $request->input('provider_name');
         $provider->description = $request->input('description');
+        $provider->prefixes = $request->input('prefixes');
 
         $this->providerRepository->providerUpdate($provider);
     }

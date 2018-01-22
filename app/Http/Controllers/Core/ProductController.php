@@ -71,4 +71,20 @@ class ProductController extends Controller
         $this->productService->productEdit($product, $request);
         return redirect('admin/product');
     }
+
+    public function getProductsByPhoneNumber(Request $request)
+    {
+        $providers = Provider::all();
+        $phonePrefix = substr($request->get('nomor_hp'), 0, 4);
+        $productArray = [];
+        foreach ($providers as $provider) {
+             $arrays = explode(',', $provider->prefixes);
+             for ($i = 0; $i < count($arrays); $i++) {
+                 if ($phonePrefix == $arrays[$i]) {
+                     $productArray = $provider->products;
+                 }
+             }
+        }
+        return json_encode($productArray);
+    }
 }

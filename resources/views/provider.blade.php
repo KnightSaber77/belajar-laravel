@@ -29,6 +29,7 @@
                             <th class="hidden-xs">ID</th>
                             <th>Provider's Name</th>
                             <th>Description</th>
+                            <th>Prefixes</th>
                         </tr>
                         </thead>
 
@@ -54,6 +55,7 @@
                                 <td class="hidden-xs">{{$provider->id}}</td>
                                 <td>{{ $provider->provider_name}}</td>
                                 <td>{{ $provider->description}}</td>
+                                <td>{{ $provider->prefixes }}</td>
                             </tr>
                         @endforeach
 

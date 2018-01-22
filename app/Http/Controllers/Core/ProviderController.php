@@ -25,7 +25,8 @@ class ProviderController extends Controller
     {
         $providerName = $request->input('provider_name');
         $description = $request->input('description');
-        $this->providerService->providerAdd($providerName, $description);
+        $prefixes = $request->input('prefixes');
+        $this->providerService->providerAdd($providerName, $description, $prefixes);
 
         return redirect('admin/provider');
     }
