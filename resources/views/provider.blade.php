@@ -37,7 +37,7 @@
                         @foreach ($providers as $provider)
                             <tr>
                                 <td align="center">
-                                    <form action="{{'/admin/provider/edit/'.$provider->id}}" method=""POST>
+                                    <form action="{{'/admin/provider/edit/'.$provider->id}}" method="GET">
                                         <button type="submit" class="btn btn-default">
                                             <a><em class="fa fa-pencil"></em></a>
                                         </button>

@@ -70,7 +70,7 @@ Route::post('admin/createnewproduct', 'Core\ProductController@productAdd')->midd
 
 Route::delete('/admin/product/delete/{product}', 'Core\ProductController@productDelete')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/product/edit/{product_name}', 'Core\ProductController@productShowEdit')->middleware(AdminLoginMiddleware::class);
+Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productShowEdit')->middleware(AdminLoginMiddleware::class);
 
 Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
@@ -83,4 +83,8 @@ Route::get('checknumber', function($productArray, $nomor_hp){
 Route::get('testnumber', function(Request $request) {
    $nomorHp = $request->get('nomor_hp');
    return('nomor_hp = ' . $nomorHp);
+});
+
+Route::get('/addtransaction', function () {
+    return view('payment');
 });

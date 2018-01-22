@@ -19,9 +19,10 @@ class ProductService
         $this->productRepository = new ProductRepository();
     }
 
-    public function productAdd($productName, $providerId, $price, $tipe)
+    public function productAdd($productCode, $productName, $providerId, $price, $tipe)
     {
         $product = new Product();
+        $product->product_code = $productCode;
         $product->product_name = $productName;
         $product->provider_id = $providerId;
         $product->price = $price;
@@ -50,8 +51,8 @@ class ProductService
         return $this->productRepository->getAll();
     }
 
-    public function getOne($product_name)
+    public function getOne($product_code)
     {
-        return $this->productRepository->getOne($product_name);
+        return $this->productRepository->getOne($product_code);
     }
 }

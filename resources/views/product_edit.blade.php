@@ -4,11 +4,19 @@
     <div class="panel-body">
         <h1 align = "center">Edit Product</h1> <br>
         <!-- New Task Form -->
-        <form action="{{ url('admin/product/editproduct/'.$product->product_name)}}" method="POST" class="form-horizontal">
+        <form action="{{ url('admin/product/editproduct/'.$product->product_code)}}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
         <!-- Task Name -->
             <div class="form-group">
+                <label for="product_code" class="col-sm-3 control-label">Product Name</label>
+                <div class="col-sm-6">
+                    <input type="text" name="product_code" id="product_code" class="form-control" value="{{ $product->product_code }}">
+                </div>
+
+                <br>
+                <br>
+
                 <label for="product_name" class="col-sm-3 control-label">Product Name</label>
 
                 <div class="col-sm-6">
@@ -29,7 +37,7 @@
                 <div class="col-sm-6">
                     <select name="provider_id" id="provider_id" class="form-control form-control-lg" value="{{ $product->provider_id }}">
                         @foreach ($providers as $provider)
-                            <option value="{{ $provider->id }}"> {{ $provider->provider_name }} </option>
+                            <option <?php if ($provider->id == $product->provider_id) echo "selected='selected'"?> value="{{ $provider->id }}"> {{ $provider->provider_name }} </option>
                         @endforeach
                     </select>
 
@@ -41,8 +49,8 @@
                 <div class="col-sm-6">
 
                     <select name="tipe" id="tipe" class="form-control form-control-lg" value="{{ $product->tipe }}">
-                        <option value="1">Pulsa</option>
-                        <option value="2">Data</option>
+                        <option <?php if ($product->tipe == 1) echo "selected='selected'"?> value="1">Pulsa</option>
+                        <option <?php if ($product->tipe == 2) echo "selected='selected'"?>value="2">Data</option>
                     </select>
                 </div>
             </div>

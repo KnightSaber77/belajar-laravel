@@ -36,11 +36,12 @@ class ProductController extends Controller
     }
     public function productAdd(Request $request)
     {
+        $productCode = $request->input('product_code');
         $productName = $request->input('product_name');
         $providerId = $request->input('provider_id');
         $price = $request->input('price');
         $tipe = $request->input('tipe');
-        $this->productService->productAdd($productName, $providerId, $price, $tipe);
+        $this->productService->productAdd($productCode, $productName, $providerId, $price, $tipe);
 
         return redirect('admin/product');
     }
@@ -57,16 +58,16 @@ class ProductController extends Controller
         return view('product_new', $data);
     }
 
-    public function productShowEdit($product_name)
+    public function productShowEdit($product_code)
     {
-        $data['product'] = $this->productService->getOne($product_name);
+        $data['product'] = $this->productService->getOne($product_code);
         $data['providers'] = $this->providerService->getAll();
         return view('product_edit', $data);
     }
 
-    public function productEdit($product_name, Request $request)
+    public function productEdit($product_code, Request $request)
     {
-        $product = $this->productService->getOne($product_name);
+        $product = $this->productService->getOne($product_code);
 
         $this->productService->productEdit($product, $request);
         return redirect('admin/product');

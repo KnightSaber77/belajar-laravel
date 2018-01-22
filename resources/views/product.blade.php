@@ -29,6 +29,7 @@
                         <thead>
                         <tr>
                             <th><em class="fa fa-cog"></em></th>
+                            <th>Product's Code</th>
                             <th>Product's Name</th>
                             <th>Provider</th>
                             <th>Price</th>
@@ -40,7 +41,7 @@
                         @foreach ($products as $product)
                             <tr>
                                 <td align="center">
-                                    <form action="{{'/admin/product/edit/'.$product->product_name}}" method=""POST>
+                                    <form action="{{'/admin/product/edit/'.$product->product_code}}" method="GET">
                                         <button type="submit" class="btn btn-default">
                                             <a><em class="fa fa-pencil"></em></a>
                                         </button>
@@ -53,6 +54,7 @@
                                         </button>
                                     </form>
                                 </td>
+                                <td>{{ $product->product_code }}</td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->provider->provider_name }}</td>
                                 <td>{{ $product->price }}</td>

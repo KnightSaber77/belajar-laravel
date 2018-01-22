@@ -9,8 +9,15 @@
 
         <!-- Task Name -->
             <div class="form-group">
-                <label for="product_name" class="col-sm-3 control-label">Product Name</label>
+                <label for="product_code" class="col-sm-3 control-label">Product Code</label>
+                <div class="col-sm-6">
+                    <input type="text" name="product_code" id="product_code" class="form-control" value="{{ old('product_code') }}">
+                </div>
 
+                <br>
+                <br>
+
+                <label for="product_name" class="col-sm-3 control-label">Product Name</label>
                 <div class="col-sm-6">
                     <input type="text" name="product_name" id="product_name" class="form-control" value="{{ old('product_name') }}">
                 </div>

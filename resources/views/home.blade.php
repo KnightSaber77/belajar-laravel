@@ -25,15 +25,6 @@
                                     <input type="text" name="nomor_hp" id="nomor_hp" class="form-control" value="{{ old('nomor_hp') }}">
                                 </div>
                             </div>
-
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-6">
-                                    <button type="submit" class="btn btn-default">
-                                        Check Number
-                                    </button>
-                                </div>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -48,6 +39,7 @@
                         </tr>
                         </thead>
                         <tbody id="table_products">
+
                         </tbody>
                     </table>
                 </div>
@@ -83,7 +75,15 @@
                 const price = row.price;
                 const tipe = row.tipe;
 
-                const tdcog = "<td>" + "</td>";
+                const tdcog =
+                    "<td align=\"center\">" +
+                    "<form action=\"{{ url('addtransaction') }}\" method=\"GET\">" +
+                        "<button type=\"submit\" class=\"btn btn-default\">" +
+                            "<a><em class=\"fa fa-plus\"></em></a>" +
+                        "</button>" +
+                    "</form>"+
+
+                "</td>";
                 const tdName = "<td>" + name + "</td>";
                 const tdPrice = "<td>" + price + "</td>";
 
