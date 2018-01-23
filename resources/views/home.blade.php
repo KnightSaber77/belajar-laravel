@@ -17,12 +17,21 @@
 
                     <br>
                     <div class="panel-body">
-                        <form action="{{ url('product')}}" method="GET" class="form-horizontal">
+                        <form action="{{ url('addtransaction')}}" method="GET" class="form-horizontal">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="nomor_hp" class="col-sm-3 control-label">Phone Number</label>
                                 <div class="col-sm-6">
                                     <input type="text" name="nomor_hp" id="nomor_hp" class="form-control" value="{{ old('nomor_hp') }}">
+                                    <input type="hidden" name="product_code" id="product_code">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa"></i>Buy
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -34,6 +43,7 @@
                         <thead>
                         <tr>
                             <th><em class="fa fa-cog"></em></th>
+                            <th>Product's Code</th>
                             <th>Product's Name</th>
                             <th>Price</th>
                         </tr>
@@ -62,6 +72,13 @@
             });
         });
 
+
+        function saveProductCode(code) {
+            const productCodeInput = $('#product_code');
+            productCodeInput.val(code);
+            alert('Product Ditambahkan');
+        }
+
         function populateProducts(data) {
             const dataArray = JSON.parse(data);
             console.log(JSON.stringify(dataArray, 0, 4));
@@ -70,6 +87,7 @@
             tableElement.find('tr').remove();
 
             dataArray.forEach(function(row) {
+                const code = row.product_code;
                 const name = row.product_name;
                 const provider_id = row.provider_id;
                 const price = row.price;
@@ -84,10 +102,17 @@
                     "</form>"+
 
                 "</td>";
+                const tdAdd = "<td align=\"center\">" +
+                    "<button onclick=\"saveProductCode('"+code+"')\" class=\"btn btn-default\">" +
+                    "<a><em class=\"fa fa-plus\"></em></a>" +
+                    "</button>" +
+
+                    "</td>";
+                const tdCode = "<td>" + code + "</td>";
                 const tdName = "<td>" + name + "</td>";
                 const tdPrice = "<td>" + price + "</td>";
 
-                const finalAppend = "<tr>"+ tdcog + tdName + tdPrice + "</tr>";
+                const finalAppend = "<tr>"+ tdAdd + tdCode+ tdName + tdPrice + "</tr>";
                 tableElement.append(finalAppend);
             });
         }

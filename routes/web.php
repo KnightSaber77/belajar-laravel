@@ -85,6 +85,7 @@ Route::get('testnumber', function(Request $request) {
    return('nomor_hp = ' . $nomorHp);
 });
 
-Route::get('/addtransaction', function () {
+Route::get('/addtransaction', function (Request $request) {
+    dd($request->all());
     return view('payment');
 });
