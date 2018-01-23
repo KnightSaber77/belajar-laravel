@@ -17,7 +17,7 @@ class CreateTransactionTable extends Migration
             $table->increments('id');
             $table->string('payment_id');
             $table->string('nomor_hp');
-            $table->string('product_name');
+            $table->string('product_code');
             $table->tinyInteger('status');
             $table->integer('price');
             $table->timestamps();

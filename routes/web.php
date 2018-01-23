@@ -11,6 +11,7 @@
 |
 */
 
+use App\Core\Models\Payment;
 use App\Core\Models\Product;
 use App\Core\Models\Provider;
 use App\Core\Models\Transaction;
@@ -86,6 +87,39 @@ Route::get('testnumber', function(Request $request) {
 });
 
 Route::get('/addtransaction', function (Request $request) {
-    dd($request->all());
-    return view('payment');
+    $product = Product::find($request->get('product_code'));
+    $kode = strtoupper(str_random(8));
+    $nomor_hp = $request->get('nomor_hp');
+
+    $data['product'] = $product;
+    $data['kode'] = $kode;
+    $data['nomor_hp'] = $nomor_hp;
+
+    return view('payment', $data);
+});
+
+Route::post('checkout/', function(Request $request){
+    $payment = new Payment();
+    $transaction = new Transaction();
+
+    $product = Product::find($request->input('product_code'));
+
+    $payment->payment_id = $request->input('kode');
+    $payment->status = 2;
+    $payment->total = $product->price;
+
+    $payment->save();
+
+    $transaction->payment_id = $payment->payment_id;
+    $transaction->nomor_hp = $request->input('nomor_hp');
+    $transaction->product_name = $request->input('product_code');
+    $transaction->status = 2;
+    $transaction->price = $product->price;
+
+    $transaction->save();
+
+    $data['transaction'] = $transaction;
+    $data['payment'] = $payment;
+
+    return view('transfer', $data);
 });
