@@ -65,6 +65,9 @@ Route::get('lacak', function(){
     return view('search', $data);
 });
 
-Route::get('status', function(){
-
+Route::get('status', function(Request $request){
+    $payment = Payment::find($request->input('payment_id'));
+    $data['transactions'] = $payment->transactions;
+    $data['payment'] = $payment;
+    return view('payment_status', $data);
 });
