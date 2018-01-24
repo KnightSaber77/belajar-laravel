@@ -54,4 +54,23 @@ class ProviderService
     {
         return $this->providerRepository->getAll();
     }
+
+    public function getProductsByPhoneNumberAndType($phoneNumber, $tipe)
+    {
+        $providers = $this->providerRepository->getAll();
+        $phonePrefix = substr($phoneNumber, 0, 4);
+        $productArray = [];
+        foreach ($providers as $provider) {
+            $providerPrefixes = explode(',', $provider->prefixes);
+            if (in_array($phonePrefix, $providerPrefixes)) {
+                foreach($provider->products as $product) {
+                    if ($product->tipe == $tipe) {
+                        array_push($productArray, $product);
+                    }
+                }
+            }
+        }
+
+        return($productArray);
+    }
 }

@@ -73,21 +73,12 @@ class ProductController extends Controller
         return redirect('admin/product');
     }
 
-    public function getProductsByPhoneNumber(Request $request)
+    public function getProductsByPhoneNumberAndType(Request $request)
     {
-        $providers = $this->providerService->getAll();
-        $phonePrefix = substr($request->get('nomor_hp'), 0, 4);
+        $phoneNumber = $request->get('nomor_hp');
         $tipe = intval($request->get('tipe'));
-        $productArray = [];
-        foreach ($providers as $provider) {
-             $providerPrefixes = explode(',', $provider->prefixes);
-             if (in_array($phonePrefix, $providerPrefixes)){
-                 foreach($provider->products as $product){
-                     if ($product->tipe == $tipe) array_push($productArray, $product);
-                 }
-             }
-        }
+        $products = $this->providerService->getProductsByPhoneNumberAndType($phoneNumber, $tipe);
 
-        return json_encode($productArray);
+        return json_encode($products);
     }
 }

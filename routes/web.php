@@ -54,7 +54,7 @@ Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productS
 
 Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::get('product', 'Core\ProductController@getProductsByPhoneNumber');
+Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
 
 Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
 

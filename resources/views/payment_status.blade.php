@@ -31,14 +31,7 @@
                             <tr>
                                 <th>{{ $transaction->product_name }}</th>
                                 <th>{{ $transaction->price }}</th>
-                                <th><?php
-                                    if ($transaction->status == 1){
-                                        echo "Berhasil";
-                                    } else {
-                                        echo "Pending";
-                                    }
-                                ?>
-                                </th>
+                                <th>{{ $transaction->getStatusName() }}</th>
                             </tr>
                             @endforeach
                             </tbody>
