@@ -29,6 +29,8 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-6">
+                                    <input class="tipe" type="radio" name="tipe" id="tipe" value="1" checked="checked">Pulsa &ensp;
+                                    <input class="tipe" type="radio" name="tipe" id="tipe" value="2">Data &ensp;&ensp;
                                     <button type="submit" class="btn btn-default">
                                         <i class="fa"></i>Buy
                                     </button>
@@ -59,17 +61,32 @@
     </div>
     <script>
         var obj = [];
-        $('#nomor_hp').on('keyup', function(){
-            var nomorHp = $(this).val();
+
+        function getProduct(nomorHp, tipe) {
             $.ajax({
                 url: "/product",
                 data: {
-                    nomor_hp : nomorHp
+                    nomor_hp : nomorHp,
+                    tipe : tipe
                 },
                 success: function( result ) {
                     populateProducts(result);
                 }
             });
+        }
+
+        $('.tipe').click(function(){
+            if ($(this).is(':checked')) {
+                var nomorHp = $('#nomor_hp').val();
+                var tipe = $(this).val();
+                getProduct(nomorHp, tipe);
+            }
+        });
+
+        $('#nomor_hp').on('keyup', function(){
+            var nomorHp = $(this).val();
+            var tipe = $('input[name=tipe]:checked').val();
+            getProduct(nomorHp, tipe);
         });
 
 

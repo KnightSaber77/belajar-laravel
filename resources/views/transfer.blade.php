@@ -22,8 +22,10 @@
                             BCA 888818881811
                         </h3>
                     </div>
-                </div>
+                    <br>
 
+                    <h3 align="center">Lacak status pesanan anda di<a href = "/lacak"> sini </a></h3>
+                </div>
 
             </div>
         </div>

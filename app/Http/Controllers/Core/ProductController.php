@@ -77,13 +77,17 @@ class ProductController extends Controller
     {
         $providers = $this->providerService->getAll();
         $phonePrefix = substr($request->get('nomor_hp'), 0, 4);
+        $tipe = intval($request->get('tipe'));
         $productArray = [];
         foreach ($providers as $provider) {
              $providerPrefixes = explode(',', $provider->prefixes);
              if (in_array($phonePrefix, $providerPrefixes)){
-                 $productArray = $provider->products;
+                 foreach($provider->products as $product){
+                     if ($product->tipe == $tipe) array_push($productArray, $product);
+                 }
              }
         }
+
         return json_encode($productArray);
     }
 }
