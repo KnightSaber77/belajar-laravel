@@ -19,10 +19,10 @@ class PaymentService
     {
         $this->paymentRepository = new PaymentRepository();
     }
-    public function paymentAdd($payment_id, $status, $price)
+    public function paymentAdd($paymentId, $status, $price)
     {
         $payment = new Payment();
-        $payment->payment_id = $payment_id;
+        $payment->payment_id = $paymentId;
         $payment->status = $status;
         $payment->total = $price;
 
