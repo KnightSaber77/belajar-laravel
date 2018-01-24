@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers\Core;
 
+use App\Core\Models\Payment;
+use App\Core\Models\Transaction;
 use App\Core\Services\ProductService;
 use App\Core\Services\ProviderService;
 use App\Core\Services\TransactionService;
@@ -53,11 +55,12 @@ class CheckOutController extends Controller
         $paymentId = $request->input('payment_id');
         $nomorHp = $request->input('nomor_hp');
         $productName = $request->input('product_code');
-        $status = 2;
+        $paymentStatus = Payment::STATUS_PENDING;
+        $transactionStatus = Transaction::STATUS_PENDING;
         $price = $product->price;
 
-        $payment = $this->paymentService->paymentAdd($paymentId, $status, $price);
-        $transaction = $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $status, $price);
+        $payment = $this->paymentService->paymentAdd($paymentId, $paymentStatus, $price);
+        $transaction = $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $transactionStatus, $price);
 
         $data['transaction'] = $transaction;
         $data['payment'] = $payment;

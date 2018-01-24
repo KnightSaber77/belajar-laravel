@@ -59,3 +59,12 @@ Route::get('product', 'Core\ProductController@getProductsByPhoneNumber');
 Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
 
 Route::post('checkout/', 'Core\CheckOutController@checkOut');
+
+Route::get('lacak', function(){
+    $data['payment'] = Payment::all();
+    return view('search', $data);
+});
+
+Route::get('status', function(){
+
+});
