@@ -32,8 +32,8 @@ class ProductRepository
         return Product::all();
     }
 
-    public function getOne($product_code)
+    public function getOne($productCode)
     {
-        return Product::find($product_code);
+        return Product::find($productCode);
     }
 }

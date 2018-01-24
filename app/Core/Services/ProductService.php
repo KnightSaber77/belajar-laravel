@@ -38,6 +38,7 @@ class ProductService
 
     public function productEdit($product, $request)
     {
+        $product->product_code = $request->input('product_code');
         $product->product_name = $request->input('product_name');
         $product->provider_id = $request->input('provider_id');
         $product->price = $request->input('price');
@@ -51,8 +52,8 @@ class ProductService
         return $this->productRepository->getAll();
     }
 
-    public function getOne($product_code)
+    public function getOne($productCode)
     {
-        return $this->productRepository->getOne($product_code);
+        return $this->productRepository->getOne($productCode);
     }
 }

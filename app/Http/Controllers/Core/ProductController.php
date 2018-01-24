@@ -58,16 +58,16 @@ class ProductController extends Controller
         return view('product_new', $data);
     }
 
-    public function productShowEdit($product_code)
+    public function productShowEdit($productCode)
     {
-        $data['product'] = $this->productService->getOne($product_code);
+        $data['product'] = $this->productService->getOne($productCode);
         $data['providers'] = $this->providerService->getAll();
         return view('product_edit', $data);
     }
 
-    public function productEdit($product_code, Request $request)
+    public function productEdit($productCode, Request $request)
     {
-        $product = $this->productService->getOne($product_code);
+        $product = $this->productService->getOne($productCode);
 
         $this->productService->productEdit($product, $request);
         return redirect('admin/product');
@@ -75,15 +75,13 @@ class ProductController extends Controller
 
     public function getProductsByPhoneNumber(Request $request)
     {
-        $providers = Provider::all();
+        $providers = $this->providerService->getAll();
         $phonePrefix = substr($request->get('nomor_hp'), 0, 4);
         $productArray = [];
         foreach ($providers as $provider) {
-             $arrays = explode(',', $provider->prefixes);
-             for ($i = 0; $i < count($arrays); $i++) {
-                 if ($phonePrefix == $arrays[$i]) {
-                     $productArray = $provider->products;
-                 }
+             $providerPrefixes = explode(',', $provider->prefixes);
+             if (in_array($phonePrefix, $providerPrefixes)){
+                 $productArray = $provider->products;
              }
         }
         return json_encode($productArray);

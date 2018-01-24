@@ -40,7 +40,7 @@ class CheckOutController extends Controller
     public function transactionCart(Request $request)
     {
         $data['product'] = $this->productService->getOne($request->input('product_code'));
-        $data['kode'] = strtoupper(str_random(8));
+        $data['payment_id'] = strtoupper(str_random(8));
         $data['nomor_hp'] = $request->input('nomor_hp');
 
         return view('payment', $data);
@@ -50,14 +50,14 @@ class CheckOutController extends Controller
     {
         $product = $this->productService->getOne($request->input('product_code'));
 
-        $payment_id = $request->input('kode');
-        $nomor_hp = $request->input('nomor_hp');
-        $product_name = $request->input('product_code');
+        $paymentId = $request->input('payment_id');
+        $nomorHp = $request->input('nomor_hp');
+        $productName = $request->input('product_code');
         $status = 2;
         $price = $product->price;
 
-        $payment = $this->paymentService->paymentAdd($payment_id, $status, $price);
-        $transaction = $this->transactionService->transactionAdd($payment_id, $nomor_hp, $product_name, $status, $price);
+        $payment = $this->paymentService->paymentAdd($paymentId, $status, $price);
+        $transaction = $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $status, $price);
 
         $data['transaction'] = $transaction;
         $data['payment'] = $payment;

@@ -20,12 +20,12 @@ class TransactionService
         $this->transactionRepository = new TransactionRepository();
     }
 
-    public function transactionAdd($payment_id, $nomor_hp, $product_name, $status, $price)
+    public function transactionAdd($paymentId, $nomorHp, $productName, $status, $price)
     {
         $transaction = new Transaction();
-        $transaction->payment_id = $payment_id;
-        $transaction->nomor_hp = $nomor_hp;
-        $transaction->product_name = $product_name;
+        $transaction->payment_id = $paymentId;
+        $transaction->nomor_hp = $nomorHp;
+        $transaction->product_name = $productName;
         $transaction->status = $status;
         $transaction->price = $price;
 

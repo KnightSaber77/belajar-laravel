@@ -9,7 +9,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <h2 align="center" class="panel-title">Transaction Detail - {{ $kode }}</h2>
+                                <h2 align="center" class="panel-title">Transaction Detail - {{ $payment_id }}</h2>
                             </div>
 
                         </div>
@@ -55,7 +55,7 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="product_code" id=product_code" value="{{ $product->product_code }}">
                                 <input type="hidden" name="nomor_hp" id="nomor_hp" value="{{ $nomor_hp }}">
-                                <input type="hidden" name="kode" id="kode" value="{{ $kode }}">
+                                <input type="hidden" name="payment_id" id="payment_id" value="{{ $payment_id }}">
                                 <button type="submit" class="btn btn-success btn-block"> Checkout <i class="fa fa-angle-right"></i>
                                 </button>
                             </form>
