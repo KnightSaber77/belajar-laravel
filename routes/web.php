@@ -69,50 +69,14 @@ Route::get('admin/payment', 'Core\PaymentController@showAdminPayment');
 
 Route::get('admin/payment/{payment_id}', 'Core\PaymentController@showAdminPaymentStatus');
 
-Route::get('admin/user', function(){
-    $admins = Admin::all();
-    $data['admins'] = $admins;
-    return view('user', $data);
-});
+Route::get('admin/user', 'Core\AdminController@adminShow');
 
-Route::get('admin/user/new', function(){
-    return view('user_new');
-});
+Route::get('admin/user/new', 'Core\AdminController@showNew');
 
+Route::post('createnewadmin', 'Core\AdminController@adminAdd');
 
-Route::post('createnewadmin', function(Request $request){
+Route::get('admin/user/edit/{username}', 'Core\AdminController@showEdit');
 
-    $admin = new Admin();
+Route::post('admin/user/editadmin/{username}', 'Core\AdminController@adminEdit');
 
-    $admin->username = $request->input('username');
-    $admin->password = $request->input('password');
-    $admin->description = $request->input('description');
-
-    $admin->save();
-
-    return redirect('admin/user');
-});
-
-Route::get('admin/user/edit/{username}', function($username){
-    $admin = Admin::find($username);
-    $data['admin'] = $admin;
-    return view('user_edit', $data);
-});
-
-Route::post('admin/user/editadmin/{username}', function($username, Request $request){
-    $admin = Admin::find($username);
-
-    $admin->username = $username;
-    $admin->password = $request->password;
-    $admin->description = $request->description;
-    $admin->save();
-
-    return redirect('admin/user');
-});
-
-Route::delete('admin/user/delete/{username}', function($username){
-   $admin = Admin::find($username);
-   $admin->delete();
-
-   return redirect('admin/user');
-});
+Route::delete('admin/user/delete/{username}', 'Core\AdminController@adminDelete');
