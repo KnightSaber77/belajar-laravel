@@ -64,3 +64,14 @@ Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productS
 
 Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
+Route::get('admin/payment', function(){
+    $data['payments'] = Payment::all();
+    return view('admin_payment', $data);
+});
+
+Route::get('admin/payment/{payment_id}', function($payment_id){
+    $payment = Payment::find($payment_id);
+    $data['transactions'] = $payment->transactions;
+    $data['payment'] = $payment;
+    return view('admin_payment_list', $data);
+});
