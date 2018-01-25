@@ -35,4 +35,18 @@ class PaymentController extends Controller
         $data['payment'] = $payment;
         return view('payment_status', $data);
     }
+
+    public function showAdminPayment()
+    {
+        $data['payments'] = $this->paymentService->getAll();
+        return view('admin_payment', $data);
+    }
+
+    public function showAdminPaymentStatus($payment_id)
+    {
+        $payment = $this->paymentService->getOne($payment_id);
+        $data['transactions'] = $payment->transactions;
+        $data['payment'] = $payment;
+        return view('admin_payment_list', $data);
+    }
 }
