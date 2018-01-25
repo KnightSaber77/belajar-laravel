@@ -20,6 +20,16 @@ use Illuminate\Http\Request;
 
 Route::get('/', 'Core\CheckOutController@showHome');
 
+Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
+
+Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
+
+Route::post('checkout/', 'Core\CheckOutController@checkOut');
+
+Route::get('lacak', 'Core\PaymentController@showSearchHome');
+
+Route::get('status', 'Core\PaymentController@searchPaymentById');
+
 Route::get('/admin', 'Core\LoginController@showLayout');
 
 Route::post('/admin/login', 'Core\LoginController@login');
@@ -54,20 +64,3 @@ Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productS
 
 Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
-
-Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
-
-Route::post('checkout/', 'Core\CheckOutController@checkOut');
-
-Route::get('lacak', function(){
-    $data['payment'] = Payment::all();
-    return view('search', $data);
-});
-
-Route::get('status', function(Request $request){
-    $payment = Payment::find($request->input('payment_id'));
-    $data['transactions'] = $payment->transactions;
-    $data['payment'] = $payment;
-    return view('payment_status', $data);
-});

@@ -19,6 +19,16 @@ class PaymentService
     {
         $this->paymentRepository = new PaymentRepository();
     }
+
+    public function getAll()
+    {
+        return $this->paymentRepository->getAll();
+    }
+
+    public function getOne($payment_id)
+    {
+        return $this->paymentRepository->getOne($payment_id);
+    }
     public function paymentAdd($paymentId, $status, $price)
     {
         $payment = new Payment();
