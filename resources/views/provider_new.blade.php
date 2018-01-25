@@ -14,11 +14,19 @@
                 <div class="col-sm-6">
                     <input type="text" name="provider_name" id="provider_name" class="form-control" value="{{ old('provider_name') }}">
                 </div>
+
                 <br>
                 <br>
                 <label for="description" class="col-sm-3 control-label">Provider Description</label>
                 <div class="col-sm-6">
                     <input type="text" name="description" id="description" class="form-control" value="{{ old('description') }}">
+                </div>
+
+                <br>
+                <br>
+                <label for="prefixes" class="col-sm-3 control-label">Provider Prefixes</label>
+                <div class="col-sm-6">
+                    <input type="text" name="prefixes" id="prefixes" class="form-control" value="{{ old('prefixes') }}">
                 </div>
             </div>
 

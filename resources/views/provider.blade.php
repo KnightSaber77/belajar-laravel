@@ -29,6 +29,7 @@
                             <th class="hidden-xs">ID</th>
                             <th>Provider's Name</th>
                             <th>Description</th>
+                            <th>Prefixes</th>
                         </tr>
                         </thead>
 
@@ -36,7 +37,7 @@
                         @foreach ($providers as $provider)
                             <tr>
                                 <td align="center">
-                                    <form action="{{'/admin/provider/edit/'.$provider->id}}" method=""POST>
+                                    <form action="{{'/admin/provider/edit/'.$provider->id}}" method="GET">
                                         <button type="submit" class="btn btn-default">
                                             <a><em class="fa fa-pencil"></em></a>
                                         </button>
@@ -54,6 +55,7 @@
                                 <td class="hidden-xs">{{$provider->id}}</td>
                                 <td>{{ $provider->provider_name}}</td>
                                 <td>{{ $provider->description}}</td>
+                                <td>{{ $provider->prefixes }}</td>
                             </tr>
                         @endforeach
 

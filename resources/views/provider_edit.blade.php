@@ -20,6 +20,13 @@
                 <div class="col-sm-6">
                     <input type="text" name="description" id="description" class="form-control" value="{{ $provider->description}}">
                 </div>
+
+                <br>
+                <br>
+                <label for="prefixes" class="col-sm-3 control-label">Provider Prefixes</label>
+                <div class="col-sm-6">
+                    <input type="text" name="prefixes" id="prefixes" class="form-control" value="{{ $provider->prefixes}}">
+                </div>
             </div>
 
             <!-- Add Task Button -->

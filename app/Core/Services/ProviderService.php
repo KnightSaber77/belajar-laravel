@@ -19,11 +19,12 @@ class ProviderService
         $this->providerRepository = new ProviderRepository();
     }
 
-    public function providerAdd($providerName, $description)
+    public function providerAdd($providerName, $description, $prefixes)
     {
         $provider = new Provider();
         $provider->provider_name = $providerName;
         $provider->description = $description;
+        $provider->prefixes = $prefixes;
 
         $this->providerRepository->providerAdd($provider);
     }
@@ -39,6 +40,7 @@ class ProviderService
     {
         $provider->provider_name = $request->input('provider_name');
         $provider->description = $request->input('description');
+        $provider->prefixes = $request->input('prefixes');
 
         $this->providerRepository->providerUpdate($provider);
     }
@@ -51,5 +53,24 @@ class ProviderService
     public function getAll()
     {
         return $this->providerRepository->getAll();
+    }
+
+    public function getProductsByPhoneNumberAndType($phoneNumber, $tipe)
+    {
+        $providers = $this->providerRepository->getAll();
+        $phonePrefix = substr($phoneNumber, 0, 4);
+        $productArray = [];
+        foreach ($providers as $provider) {
+            $providerPrefixes = explode(',', $provider->prefixes);
+            if (in_array($phonePrefix, $providerPrefixes)) {
+                foreach($provider->products as $product) {
+                    if ($product->tipe == $tipe) {
+                        array_push($productArray, $product);
+                    }
+                }
+            }
+        }
+
+        return($productArray);
     }
 }

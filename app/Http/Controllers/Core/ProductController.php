@@ -36,11 +36,12 @@ class ProductController extends Controller
     }
     public function productAdd(Request $request)
     {
+        $productCode = $request->input('product_code');
         $productName = $request->input('product_name');
         $providerId = $request->input('provider_id');
         $price = $request->input('price');
         $tipe = $request->input('tipe');
-        $this->productService->productAdd($productName, $providerId, $price, $tipe);
+        $this->productService->productAdd($productCode, $productName, $providerId, $price, $tipe);
 
         return redirect('admin/product');
     }
@@ -57,18 +58,27 @@ class ProductController extends Controller
         return view('product_new', $data);
     }
 
-    public function productShowEdit($product_name)
+    public function productShowEdit($productCode)
     {
-        $data['product'] = $this->productService->getOne($product_name);
+        $data['product'] = $this->productService->getOne($productCode);
         $data['providers'] = $this->providerService->getAll();
         return view('product_edit', $data);
     }
 
-    public function productEdit($product_name, Request $request)
+    public function productEdit($productCode, Request $request)
     {
-        $product = $this->productService->getOne($product_name);
+        $product = $this->productService->getOne($productCode);
 
         $this->productService->productEdit($product, $request);
         return redirect('admin/product');
+    }
+
+    public function getProductsByPhoneNumberAndType(Request $request)
+    {
+        $phoneNumber = $request->get('nomor_hp');
+        $tipe = intval($request->get('tipe'));
+        $products = $this->providerService->getProductsByPhoneNumberAndType($phoneNumber, $tipe);
+
+        return json_encode($products);
     }
 }

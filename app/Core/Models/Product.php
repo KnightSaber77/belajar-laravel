@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $primaryKey = 'product_name';
+    protected $primaryKey = 'product_code';
     public $incrementing = false;
 
     public function provider()

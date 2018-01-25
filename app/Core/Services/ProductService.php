@@ -19,9 +19,10 @@ class ProductService
         $this->productRepository = new ProductRepository();
     }
 
-    public function productAdd($productName, $providerId, $price, $tipe)
+    public function productAdd($productCode, $productName, $providerId, $price, $tipe)
     {
         $product = new Product();
+        $product->product_code = $productCode;
         $product->product_name = $productName;
         $product->provider_id = $providerId;
         $product->price = $price;
@@ -37,6 +38,7 @@ class ProductService
 
     public function productEdit($product, $request)
     {
+        $product->product_code = $request->input('product_code');
         $product->product_name = $request->input('product_name');
         $product->provider_id = $request->input('provider_id');
         $product->price = $request->input('price');
@@ -50,8 +52,8 @@ class ProductService
         return $this->productRepository->getAll();
     }
 
-    public function getOne($product_name)
+    public function getOne($productCode)
     {
-        return $this->productRepository->getOne($product_name);
+        return $this->productRepository->getOne($productCode);
     }
 }
