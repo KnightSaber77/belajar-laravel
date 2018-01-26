@@ -12,6 +12,16 @@ use App\Core\Models\Payment;
 
 class PaymentRepository
 {
+
+    public function getAll()
+    {
+        return Payment::all();
+    }
+
+    public function getOne($payment_id)
+    {
+        return Payment::find($payment_id);
+    }
     public function paymentAdd($payment)
     {
         $payment->save();

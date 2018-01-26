@@ -73,7 +73,10 @@
                     </table>
 
                 </div>
-
+                <div class="panel-footer">
+                    <br>
+                    <p align = "center"><b>Pulta Product</b></p>
+                </div>
 
             </div>
         </div>

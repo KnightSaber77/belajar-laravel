@@ -41,7 +41,7 @@
 
         .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
             text-align:center;
-            width: 100px;
+            width: 120px;
         }
 
         .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
@@ -80,6 +80,71 @@
         }
 
         .panel-table .panel-body .table-bordered > tbody > tr > td{
+            line-height: 34px;
+        }
+
+        /**/
+
+        .panelx-table .panel-footer .col{
+            line-height: 34px;
+            height: 34px;
+        }
+
+        .panelx-table .panel-heading .col h3{
+            line-height: 30px;
+            height: 30px;
+        }
+
+        .panelx-table .panel-body .table-bordered > tbody > tr > td{
+            line-height: 34px;
+        }
+
+        .panelx-table .panel-body{
+            padding:0;
+        }
+
+        .panelx-table .panel-body .table-bordered{
+            border-style: none;
+            margin:0;
+        }
+
+
+        .panelx-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+        .panelx-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+            border-right: 0px;
+        }
+
+        .panelx-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+        .panelx-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+            border-left: 0px;
+        }
+
+        .panelx-table .panel-body .table-bordered > tbody > tr:first-of-type > td{
+            border-bottom: 0px;
+        }
+
+        .panelx-table .panel-body .table-bordered > thead > tr:first-of-type > th{
+            border-top: 0px;
+        }
+
+        .panelx-table .panel-footer .pagination{
+            margin:0;
+        }
+
+        /*
+        used to vertically center elements, may need modification if you're not using default sizes.
+        */
+        .panelx-table .panel-footer .col{
+            line-height: 34px;
+            height: 34px;
+        }
+
+        .panelx-table .panel-heading .col h3{
+            line-height: 30px;
+            height: 30px;
+        }
+
+        .panelx-table .panel-body .table-bordered > tbody > tr > td{
             line-height: 34px;
         }
     </style>

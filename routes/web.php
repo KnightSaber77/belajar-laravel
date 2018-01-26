@@ -15,10 +15,21 @@ use App\Core\Models\Payment;
 use App\Core\Models\Product;
 use App\Core\Models\Provider;
 use App\Core\Models\Transaction;
+use App\Core\Models\Admin;
 use App\Http\Middleware\AdminLoginMiddleware;
 use Illuminate\Http\Request;
 
 Route::get('/', 'Core\CheckOutController@showHome');
+
+Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
+
+Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
+
+Route::post('checkout/', 'Core\CheckOutController@checkOut');
+
+Route::get('lacak', 'Core\PaymentController@showSearchHome');
+
+Route::get('status', 'Core\PaymentController@searchPaymentById');
 
 Route::get('/admin', 'Core\LoginController@showLayout');
 
@@ -54,20 +65,18 @@ Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productS
 
 Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
+Route::get('admin/payment', 'Core\PaymentController@showAdminPayment');
 
-Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
+Route::get('admin/payment/{payment_id}', 'Core\PaymentController@showAdminPaymentStatus');
 
-Route::post('checkout/', 'Core\CheckOutController@checkOut');
+Route::get('admin/user', 'Core\AdminController@adminShow');
 
-Route::get('lacak', function(){
-    $data['payment'] = Payment::all();
-    return view('search', $data);
-});
+Route::get('admin/user/new', 'Core\AdminController@showNew');
 
-Route::get('status', function(Request $request){
-    $payment = Payment::find($request->input('payment_id'));
-    $data['transactions'] = $payment->transactions;
-    $data['payment'] = $payment;
-    return view('payment_status', $data);
-});
+Route::post('createnewadmin', 'Core\AdminController@adminAdd');
+
+Route::get('admin/user/edit/{username}', 'Core\AdminController@showEdit');
+
+Route::post('admin/user/editadmin/{username}', 'Core\AdminController@adminEdit');
+
+Route::delete('admin/user/delete/{username}', 'Core\AdminController@adminDelete');
