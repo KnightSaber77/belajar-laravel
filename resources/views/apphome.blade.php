@@ -23,6 +23,12 @@
             crossorigin="anonymous">
     </script>
     <style>
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        Example:
+
         body {
             font-family: 'Lato';
         }
@@ -161,6 +167,7 @@
             color: white;
             text-decoration: none;
         }
+
     </style>
 </head>
 <body id="app-layout">

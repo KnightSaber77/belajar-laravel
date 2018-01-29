@@ -4,6 +4,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <a href="https://placeholder.com"><img src="http://via.placeholder.com/1200x150"></a>
+            </div>
+        </div>
+    </div>
+
+    <
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
 
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">
