@@ -65,18 +65,22 @@ Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productS
 
 Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/payment', 'Core\PaymentController@showAdminPayment');
+Route::get('admin/payment', 'Core\PaymentController@showAdminPayment')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/payment/{payment_id}', 'Core\PaymentController@showAdminPaymentStatus');
+Route::get('admin/payment/{payment_id}', 'Core\PaymentController@showAdminPaymentStatus')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/user', 'Core\AdminController@adminShow');
+Route::get('admin/user', 'Core\AdminController@adminShow')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/user/new', 'Core\AdminController@showNew');
+Route::get('admin/user/new', 'Core\AdminController@showNew')->middleware(AdminLoginMiddleware::class);
 
-Route::post('createnewadmin', 'Core\AdminController@adminAdd');
+Route::post('createnewadmin', 'Core\AdminController@adminAdd')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/user/edit/{username}', 'Core\AdminController@showEdit');
+Route::get('admin/user/edit/{username}', 'Core\AdminController@showEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::post('admin/user/editadmin/{username}', 'Core\AdminController@adminEdit');
+Route::post('admin/user/editadmin/{username}', 'Core\AdminController@adminEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::delete('admin/user/delete/{username}', 'Core\AdminController@adminDelete');
+Route::delete('admin/user/delete/{username}', 'Core\AdminController@adminDelete')->middleware(AdminLoginMiddleware::class);
+
+Route::get('test', function(){
+   return view('test');
+});

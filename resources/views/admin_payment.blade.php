@@ -50,7 +50,7 @@
                     </div>
                     <div class="panel-footer">
                         <br>
-                        <p align = "center"><b>Pulta Provider</b></p>
+                        <p align = "center"><b>Pulta Payment</b></p>
                     </div>
                 </div>
 
