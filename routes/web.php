@@ -45,25 +45,25 @@ Route::get('/admin/provider', 'Core\ProviderController@providershow')->middlewar
 
 Route::get('/admin/provider/new', 'Core\ProviderController@showNew')->middleware(AdminLoginMiddleware::class);
 
-Route::post('/admin/createnewprovider', 'Core\ProviderController@provideradd')->middleware(AdminLoginMiddleware::class);
+Route::post('/admin/provider/new', 'Core\ProviderController@provideradd')->middleware(AdminLoginMiddleware::class);
 
 Route::delete('/admin/provider/delete/{provider}', 'Core\ProviderController@providerdelete')->middleware(AdminLoginMiddleware::class);
 
 Route::get('/admin/provider/edit/{id}', 'Core\ProviderController@providerShowOne')->middleware(AdminLoginMiddleware::class);
 
-Route::post('admin/provider/editprovider/{id}', 'Core\ProviderController@providerEdit')->middleware(AdminLoginMiddleware::class);
+Route::post('admin/provider/edit/{id}', 'Core\ProviderController@providerEdit')->middleware(AdminLoginMiddleware::class);
 
 Route::get('admin/product', 'Core\ProductController@productShow')->middleware(AdminLoginMiddleware::class);
 
 Route::get('admin/product/new', 'Core\ProductController@productShowNew')->middleware(AdminLoginMiddleware::class);
 
-Route::post('admin/createnewproduct', 'Core\ProductController@productAdd')->middleware(AdminLoginMiddleware::class);
+Route::post('admin/product/new', 'Core\ProductController@productAdd')->middleware(AdminLoginMiddleware::class);
 
 Route::delete('/admin/product/delete/{product}', 'Core\ProductController@productDelete')->middleware(AdminLoginMiddleware::class);
 
 Route::get('admin/product/edit/{product_code}', 'Core\ProductController@productShowEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::post('admin/product/editproduct/{product_name}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
+Route::post('admin/product/edit/{product_code}', 'Core\ProductController@productEdit')->middleware(AdminLoginMiddleware::class);
 
 Route::get('admin/payment', 'Core\PaymentController@showAdminPayment')->middleware(AdminLoginMiddleware::class);
 
@@ -73,11 +73,11 @@ Route::get('admin/user', 'Core\AdminController@adminShow')->middleware(AdminLogi
 
 Route::get('admin/user/new', 'Core\AdminController@showNew')->middleware(AdminLoginMiddleware::class);
 
-Route::post('createnewadmin', 'Core\AdminController@adminAdd')->middleware(AdminLoginMiddleware::class);
+Route::post('admin/user/new', 'Core\AdminController@adminAdd')->middleware(AdminLoginMiddleware::class);
 
 Route::get('admin/user/edit/{username}', 'Core\AdminController@showEdit')->middleware(AdminLoginMiddleware::class);
 
-Route::post('admin/user/editadmin/{username}', 'Core\AdminController@adminEdit')->middleware(AdminLoginMiddleware::class);
+Route::post('admin/user/edit/{username}', 'Core\AdminController@adminEdit')->middleware(AdminLoginMiddleware::class);
 
 Route::delete('admin/user/delete/{username}', 'Core\AdminController@adminDelete')->middleware(AdminLoginMiddleware::class);
 
