@@ -39,4 +39,21 @@ class PaymentService
         $this->paymentRepository->paymentAdd($payment);
         return $payment;
     }
+
+    public function getByFilter($startDate, $endDate, $status, $paymentId)
+    {
+        $payments = $this->paymentRepository->getAll();
+        $startDate .= ' 00:00:00';
+        $endDate .= ' 23:59:59';
+        $payments = $payments->where('created_at', '>=', $startDate);
+        $payments = $payments->where('created_at', '<=', $endDate);
+        if ($status != 0) {
+            $payments = $payments->where('status', '=', $status);
+        }
+        if (!empty($paymentId)) {
+            $payments = $payments->where('payment_id', '=', $paymentId);
+        }
+
+        return $payments;
+    }
 }

@@ -36,9 +36,16 @@ class PaymentController extends Controller
         return view('payment_status', $data);
     }
 
-    public function showAdminPayment()
+    public function showAdminPayment(Request $request)
     {
-        $data['payments'] = $this->paymentService->getAll();
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $status = $request->input('status');
+        $paymentId = $request->input('payment_id');
+
+        $payments = $this->paymentService->getByFilter($startDate, $endDate, $status, $paymentId);
+
+        $data['payments'] = $payments;
         return view('admin_payment', $data);
     }
 
