@@ -278,6 +278,9 @@
                 <li>
                     <a href="/admin/user">Users</a>
                 </li>
+                <li>
+                    <a href="/admin/banner">Banners</a>
+                </li>
             </ul>
         </div>
     </div>
