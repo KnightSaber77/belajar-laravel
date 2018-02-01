@@ -11,12 +11,12 @@
 |
 */
 
-use App\Banner;
 use App\Core\Models\Payment;
 use App\Core\Models\Product;
 use App\Core\Models\Provider;
 use App\Core\Models\Transaction;
 use App\Core\Models\Admin;
+use App\Core\Models\Banner;
 use App\Http\Middleware\AdminLoginMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -87,34 +87,10 @@ Route::get('test', function(){
    return view('test');
 });
 
-Route::get('admin/banner', function(){
-    $banners = Banner::all();
-    $data['banners'] = $banners;
-   return view('banner', $data);
-});
+Route::get('admin/banner', 'Core\BannerController@bannerShow')->middleware(AdminLoginMiddleware::class);
 
-Route::get('admin/banner/new', function(){
-    return view('banner_new');
-});
+Route::get('admin/banner/new', 'Core\BannerController@showNew')->middleware(AdminLoginMiddleware::class);
 
-Route::post('upload', function(Request $request) {
-    if (Input::hasFile('file')) {
-        $file = Input::file('file');
-        $file->move('banner_pulta', $file->getClientOriginalName());
+Route::post('upload', 'Core\BannerController@bannerAdd')->middleware(AdminLoginMiddleware::class);
 
-        $banner = new Banner();
-        $banner->name = $request->input('name');
-        $banner->path = "/banner_pulta/" . $file->getClientOriginalName();
-        $banner->save();
-
-        return redirect('/admin/banner');
-    }
-});
-
-ROute::delete('/admin/banner/delete/{id}', function($id){
-    $banner = Banner::find($id);
-    $file_path = public_path().$banner->path;
-    unlink($file_path);
-    $banner->delete();
-    return redirect('/admin/banner');
-});
+ROute::delete('/admin/banner/delete/{id}', 'Core\BannerController@bannerDelete')->middleware(AdminLoginMiddleware::class);
