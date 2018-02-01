@@ -52,6 +52,11 @@
         });
     </script>
     <style>
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
         body {
             font-family: 'Lato';
         }

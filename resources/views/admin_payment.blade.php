@@ -16,14 +16,28 @@
                             {{csrf_field()}}
                             <label for="start_date" class="col-sm-3 control-label">Start Date</label>
                             <div class="col-sm-6">
-                                <input type="date" name="start_date" id="start_date" class="form-control-lg" value="{{ Carbon\Carbon::now()->toDateString('Y/m/d') }}">
+                                <input type="date" name="start_date" id="start_date" class="form-control-lg" required="required"
+                                       value="<?php
+                                       if (!empty(old('start_date'))) {
+                                            echo old('start_date');
+                                       } else {
+                                           echo Carbon\Carbon::now()->toDateString('Y/m/d');
+                                       }
+                                       ?>">
                             </div>
 
                             <br>
                             <br>
                             <label for="end_date" class="col-sm-3 control-label">End Date</label>
                             <div class="col-sm-6">
-                                <input type="date" name="end_date" id="end_date" class="form-control-lg" value="{{ Carbon\Carbon::now()->toDateString('Y/m/d') }}">
+                                <input type="date" name="end_date" id="end_date" class="form-control-lg" required="required"
+                                       value="<?php
+                                       if (!empty(old('end_date'))) {
+                                           echo old('end_date');
+                                       } else {
+                                           echo Carbon\Carbon::now()->toDateString('Y/m/d');
+                                       }
+                                       ?>">
                             </div>
 
                             <br>
@@ -31,10 +45,10 @@
                             <label for="status" class="col-sm-3 control-label">Status</label>
                             <div class="col-sm-6">
                                 <select name="status" id="status" class="form-control-lg">
-                                    <option value="0">All</option>
-                                    <option value="1">Paid</option>
-                                    <option value="2">Pending</option>
-                                    <option value="3">Failed</option>
+                                    <option <?php if (old('status') == 0) echo "selected='selected'"?> value="0">All</option>
+                                    <option <?php if (old('status') == 1) echo "selected='selected'"?> value="1">Paid</option>
+                                    <option <?php if (old('status') == 2) echo "selected='selected'"?> value="2">Pending</option>
+                                    <option <?php if (old('status') == 3) echo "selected='selected'"?> value="3">Failed</option>
                                 </select>
                             </div>
 
@@ -42,7 +56,7 @@
                             <br>
                             <label for="payment_id" class="col-sm-3 control-label">Payment ID</label>
                             <div class="col-sm-6">
-                                <input type="text" name="payment_id" id="payment_id" class="form-control">
+                                <input type="text" name="payment_id" id="payment_id" class="form-control" value="{{ old('payment_id') }}">
                             </div>
 
                             <br>

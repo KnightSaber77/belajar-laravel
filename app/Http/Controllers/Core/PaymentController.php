@@ -38,6 +38,7 @@ class PaymentController extends Controller
 
     public function showAdminPayment(Request $request)
     {
+        $request->flash();
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
         $status = $request->input('status');
