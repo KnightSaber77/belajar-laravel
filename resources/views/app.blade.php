@@ -264,9 +264,6 @@
         <div id="sidebar-wrapper" class="sidebar-toggle">
             <ul class="sidebar-nav">
                 <li>
-                    <a href="/admin/dashboard">Home</a>
-                </li>
-                <li>
                     <a href="/admin/payment">Payments</a>
                 </li>
                 <li>
@@ -280,6 +277,13 @@
                 </li>
                 <li>
                     <a href="/admin/banner">Banners</a>
+                </li>
+                <li>
+
+                        <form action="{{ url('admin/logout') }}" method="GET" class="form-horizontal">
+                            <button class="btn btn-danger">Logout</button>
+                        </form>
+
                 </li>
             </ul>
         </div>

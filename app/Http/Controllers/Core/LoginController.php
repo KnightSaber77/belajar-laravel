@@ -30,7 +30,7 @@ class LoginController extends Controller
         if (empty($admin)) {
             return redirect('/admin');
         }
-        return redirect ('/admin/dashboard');
+        return redirect ('/admin/payment');
     }
 
     public function logout()

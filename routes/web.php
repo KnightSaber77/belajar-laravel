@@ -40,7 +40,7 @@ Route::post('/admin/login', 'Core\LoginController@login');
 Route::get('/admin/logout', 'Core\LoginController@logout');
 
 Route::get('admin/dashboard', function () {
-    return view('dashboard');
+    return view('admin_payment');
 });
 
 Route::get('/admin/provider', 'Core\ProviderController@providershow')->middleware(AdminLoginMiddleware::class);
