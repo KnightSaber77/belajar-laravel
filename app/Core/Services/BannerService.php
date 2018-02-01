@@ -10,6 +10,7 @@ namespace App\Core\Services;
 
 use App\Core\Models\Banner;
 use App\Core\Repositories\BannerRepository;
+use Symfony\Component\HttpFoundation\File\UploadedFile as File;
 
 class BannerService
 {
@@ -29,7 +30,7 @@ class BannerService
         return $this->bannerRepository->getOne($id);
     }
 
-    public function bannerAdd($file, $name, $path)
+    public function bannerAdd(File $file, $name, $path)
     {
         $banner = new Banner();
         $banner->name = $name;
@@ -39,8 +40,9 @@ class BannerService
         $this->bannerRepository->bannerAdd($banner);
     }
 
-    public function bannerDelete($banner)
+    public function bannerDelete($id)
     {
+        $banner = $this->getOne($id);
         $file_path = public_path().$banner->path;
         unlink($file_path);
         $this->bannerRepository->bannerDelete($banner);

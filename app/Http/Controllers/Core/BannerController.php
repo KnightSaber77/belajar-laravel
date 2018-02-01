@@ -50,8 +50,7 @@ class BannerController
 
     public function bannerDelete($id)
     {
-        $banner = $this->bannerService->getOne($id);
-        $this->bannerService->bannerDelete($banner);
+        $this->bannerService->bannerDelete($id);
         return redirect('/admin/banner');
     }
 }
