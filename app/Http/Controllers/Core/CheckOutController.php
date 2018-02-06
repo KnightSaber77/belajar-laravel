@@ -16,6 +16,7 @@ use App\Core\Services\ProductService;
 use App\Core\Services\ProviderService;
 use App\Core\Services\TransactionService;
 use App\Core\Services\PaymentService;
+use App\Core\Services\CartService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,7 @@ class CheckOutController extends Controller
     private $productService;
     private $providerService;
     private $paymentService;
+    private $cartService;
 
     public function __construct()
     {
@@ -32,6 +34,7 @@ class CheckOutController extends Controller
         $this->providerService = new ProviderService();
         $this->transactionService = new TransactionService();
         $this->paymentService = new PaymentService();
+        $this->cartService = new CartService();
     }
 
     public function showHome()
@@ -50,7 +53,7 @@ class CheckOutController extends Controller
 
     public function checkOut()
     {
-        $carts = Cart::all();
+        $carts = $this->cartService->getAll();
         $paymentIdGenerate = strtoupper(str_random(8));
         $paymentStatus = Payment::STATUS_PENDING;
         $paymentPrice = 0;

@@ -26,19 +26,9 @@ Route::get('/', 'Core\CheckOutController@showHome');
 
 Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
 
-Route::get('addtocart', function(Request $request){
-    $cart = new Cart();
-    $cart->product_code = $request->input('product_code');
-    $cart->nomor_hp = $request->input('nomor_hp');
+Route::get('addtocart', 'Core\CartController@cartAdd');
 
-    $cart->save();
-    return view('home');
-});
-
-Route::delete('/cart/delete/{cart}', function(Cart $cart){
-    $cart->delete();
-    return redirect ('/cart');
-});
+Route::delete('/cart/delete/{cart}', 'Core\CartController@cartDelete');
 
 Route::get('/cart', 'Core\CheckOutController@transactionCart');
 
