@@ -8,8 +8,10 @@
 
 namespace App\Http\Controllers\Core;
 
+use App\Core\Models\Cart;
 use App\Core\Models\Payment;
 use App\Core\Models\Transaction;
+use App\Core\Models\Product;
 use App\Core\Services\ProductService;
 use App\Core\Services\ProviderService;
 use App\Core\Services\TransactionService;
@@ -41,29 +43,39 @@ class CheckOutController extends Controller
 
     public function transactionCart(Request $request)
     {
-        $data['product'] = $this->productService->getOne($request->input('product_code'));
-        $data['payment_id'] = strtoupper(str_random(8));
-        $data['nomor_hp'] = $request->input('nomor_hp');
-
+        $carts = Cart::all();
+        $data['carts'] = $carts;
         return view('payment', $data);
     }
 
-    public function checkOut(Request $request)
+    public function checkOut()
     {
-        $product = $this->productService->getOne($request->input('product_code'));
-
-        $paymentId = $request->input('payment_id');
-        $nomorHp = $request->input('nomor_hp');
-        $productName = $request->input('product_code');
+        $carts = Cart::all();
+        $paymentIdGenerate = strtoupper(str_random(8));
         $paymentStatus = Payment::STATUS_PENDING;
-        $transactionStatus = Transaction::STATUS_PENDING;
-        $price = $product->price;
+        $paymentPrice = 0;
 
-        $payment = $this->paymentService->paymentAdd($paymentId, $paymentStatus, $price);
-        $transaction = $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $transactionStatus, $price);
+        foreach($carts as $cart) {
+            $paymentPrice += $cart->product->price;
+        }
+        $payment = $this->paymentService->paymentAdd($paymentIdGenerate, $paymentStatus, $paymentPrice);
 
-        $data['transaction'] = $transaction;
+        $carts = Cart::all();
+        foreach($carts as $cart) {
+            $paymentId = $paymentIdGenerate;
+            $nomorHp = $cart->nomor_hp;
+            $productName = $cart->product_code;
+            $transactionStatus = Transaction::STATUS_PENDING;
+            $price = $cart->product->price;
+
+            $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $transactionStatus, $price);
+        }
+        $data['transactions'] = Transaction::where('payment_id', '=', $paymentIdGenerate);
         $data['payment'] = $payment;
+
+        foreach($carts as $cart) {
+            $cart->delete();
+        }
 
         return view('transfer', $data);
     }

@@ -11,6 +11,7 @@
 |
 */
 
+use App\Core\Models\Cart;
 use App\Core\Models\Payment;
 use App\Core\Models\Product;
 use App\Core\Models\Provider;
@@ -25,9 +26,23 @@ Route::get('/', 'Core\CheckOutController@showHome');
 
 Route::get('product', 'Core\ProductController@getProductsByPhoneNumberAndType');
 
-Route::get('/addtransaction', 'Core\CheckOutController@transactionCart');
+Route::get('addtocart', function(Request $request){
+    $cart = new Cart();
+    $cart->product_code = $request->input('product_code');
+    $cart->nomor_hp = $request->input('nomor_hp');
 
-Route::post('checkout/', 'Core\CheckOutController@checkOut');
+    $cart->save();
+    return view('home');
+});
+
+Route::delete('/cart/delete/{cart}', function(Cart $cart){
+    $cart->delete();
+    return redirect ('/cart');
+});
+
+Route::get('/cart', 'Core\CheckOutController@transactionCart');
+
+Route::get('checkout/', 'Core\CheckOutController@checkOut');
 
 Route::get('lacak', 'Core\PaymentController@showSearchHome');
 
