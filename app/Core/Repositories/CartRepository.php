@@ -26,4 +26,9 @@ class CartRepository {
     {
         return Cart::all();
     }
+
+    public function cartDeleteAll()
+    {
+        Cart::truncate();
+    }
 }

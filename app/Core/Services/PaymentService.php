@@ -56,4 +56,21 @@ class PaymentService
 
         return $payments;
     }
+
+    public function addByCart($paymentIdGenerate, $paymentStatus, $carts)
+    {
+        $paymentPrice = 0;
+
+        foreach($carts as $cart) {
+            $paymentPrice += $cart->product->price;
+        }
+
+        $payment = new Payment();
+        $payment->payment_id = $paymentIdGenerate;
+        $payment->status = $paymentStatus;
+        $payment->total = $paymentPrice;
+
+        $this->paymentRepository->paymentAdd($payment);
+        return $payment;
+    }
 }

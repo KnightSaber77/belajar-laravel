@@ -38,4 +38,9 @@ class CartService
     {
         return $this->cartRepository->getAll();
     }
+
+    public function cartDeleteAll()
+    {
+        $this->cartRepository->cartDeleteAll();
+    }
 }

@@ -46,7 +46,7 @@ class CheckOutController extends Controller
 
     public function transactionCart(Request $request)
     {
-        $carts = Cart::all();
+        $carts = $this->cartService->getAll();
         $data['carts'] = $carts;
         return view('payment', $data);
     }
@@ -54,31 +54,18 @@ class CheckOutController extends Controller
     public function checkOut()
     {
         $carts = $this->cartService->getAll();
+
         $paymentIdGenerate = strtoupper(str_random(8));
         $paymentStatus = Payment::STATUS_PENDING;
-        $paymentPrice = 0;
 
-        foreach($carts as $cart) {
-            $paymentPrice += $cart->product->price;
-        }
-        $payment = $this->paymentService->paymentAdd($paymentIdGenerate, $paymentStatus, $paymentPrice);
+        $payment = $this->paymentService->addByCart($paymentIdGenerate, $paymentStatus, $carts);
 
-        $carts = Cart::all();
-        foreach($carts as $cart) {
-            $paymentId = $paymentIdGenerate;
-            $nomorHp = $cart->nomor_hp;
-            $productName = $cart->product_code;
-            $transactionStatus = Transaction::STATUS_PENDING;
-            $price = $cart->product->price;
+        $this->transactionService->transactionAddAll($paymentIdGenerate, $carts);
 
-            $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $transactionStatus, $price);
-        }
         $data['transactions'] = Transaction::where('payment_id', '=', $paymentIdGenerate);
         $data['payment'] = $payment;
 
-        foreach($carts as $cart) {
-            $cart->delete();
-        }
+        $this->cartService->cartDeleteAll();
 
         return view('transfer', $data);
     }
