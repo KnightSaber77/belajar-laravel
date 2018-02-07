@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 
     <!-- Styles -->
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
     <script
@@ -21,40 +22,20 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
-    <script>
-        $(window).resize(function() {
-            var path = $(this);
-            var contW = path.width();
-            if(contW >= 751){
-                document.getElementsByClassName("sidebar-toggle")[0].style.left="200px";
-            }else{
-                document.getElementsByClassName("sidebar-toggle")[0].style.left="-200px";
-            }
-        });
-        $(document).ready(function() {
-            $('.dropdown').on('show.bs.dropdown', function(e){
-                $(this).find('.dropdown-menu').first().stop(true, true).slideDown(300);
-            });
-            $('.dropdown').on('hide.bs.dropdown', function(e){
-                $(this).find('.dropdown-menu').first().stop(true, true).slideUp(300);
-            });
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                var elem = document.getElementById("sidebar-wrapper");
-                left = window.getComputedStyle(elem,null).getPropertyValue("left");
-                if(left == "200px"){
-                    document.getElementsByClassName("sidebar-toggle")[0].style.left="-200px";
-                }
-                else if(left == "-200px"){
-                    document.getElementsByClassName("sidebar-toggle")[0].style.left="200px";
-                }
-            });
-        });
-    </script>
     <style>
         img {
             max-width: 100%;
             max-height: 100%;
+        }
+
+        input[type=date]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            display: none;
+        }
+
+        input[type=date]::-webkit-calendar-picker-indicator {
+            -webkit-appearance: none;
+            display: none;
         }
 
         body {
@@ -183,116 +164,36 @@
             line-height: 34px;
         }
 
-        #sidebar-wrapper {
-            top: 0px;
-            left: -200px;
-            width: 200px;
-            background-color: #5677fc;
+        .nav li {
+            display:inline-block;
             color: white;
-            position: fixed;
-            height: 100%;
-            z-index: 1;
-        }
-        .sidebar-nav {
-            position: absolute;
-            top: 0;
-            margin: 0;
-            padding: 0;
-            width: 250px;
-            list-style: none;
-        }
-        .sidebar-nav li {
-            text-indent: 20px;
-            line-height: 50px;
-        }
-        .sidebar-nav li a {
-            color: white;
-            display: block;
-            text-decoration: none;
-        }
-        .sidebar-nav li a:hover {
-            background: rgba(255,255,255,0.25);
-            color: white;
-            text-decoration: none;
-        }
-        .sidebar-nav li a:active, .sidebar-nav li a:focus {
-            text-decoration: none;
-        }
-        #sidebar-wrapper.sidebar-toggle {
-            transition: all 0.3s ease-out;
-            margin-left: -200px;
-        }
-        @media (min-width: 768px) {
-            #sidebar-wrapper.sidebar-toggle {
-                transition: 0s;
-                left: 200px;
-            }
         }
 
-        #main_content {
-            background-color: #FFFFFF;
-            float: left;
-            width: 85%;
-            margin-left: 200px;
-            margin-right: 10%;
-            margin-bottom: 50px;
-            box-shadow: 0px 0px 0px black;
-            padding-top: 5;
-            text-align: justify;
-            z-index: 1;
-            padding-left: 10px;
-            padding-right: 10px;
-            color: #262626;
-            opacity: 0.98;
+        .navbar{
+            background-color: #5677fc;
         }
+        .navbar a{
+            color: white;
+            text-decoration: none;
+        }
+
     </style>
 </head>
 <body id="app-layout">
-<nav id="wrapper" class="navbar navbar-default" role="navigation">
+<nav class="navbar">
     <div class="container">
         <div class="navbar-header">
-            <a id="menu-toggle" href="#" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="navbar-brand" href="home.xhtml">
-                Pulta
-            </a>
+            <a class="navbar-brand" href="/">Pulta</a>
         </div>
-        <div id="sidebar-wrapper" class="sidebar-toggle">
-            <ul class="sidebar-nav">
-                <li>
-                    <a href="/admin/payment">Payments</a>
-                </li>
-                <li>
-                    <a href="/admin/provider">Providers</a>
-                </li>
-                <li>
-                    <a href="/admin/product">Products</a>
-                </li>
-                <li>
-                    <a href="/admin/user">Users</a>
-                </li>
-                <li>
-                    <a href="/admin/banner">Banners</a>
-                </li>
-                <li>
-
-                        <form action="{{ url('admin/logout') }}" method="GET" class="form-horizontal">
-                            <button class="btn btn-danger">Logout</button>
-                        </form>
-
-                </li>
-            </ul>
-        </div>
+        <ul class="nav navbar-right">
+            <li><a href="/help">Help</a></li>
+            <li><a href="/lacak">Lacak</a></li>
+        </ul>
     </div>
 </nav>
 
-<div id="main_content">
-    @yield('content')
-</div>
+@yield('content')
+
 <!-- JavaScripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

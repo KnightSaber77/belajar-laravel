@@ -4,7 +4,7 @@
     <div class="panel-body">
         <h1 align = "center">Add Product</h1> <br>
         <!-- New Task Form -->
-        <form action="{{ url('admin/createnewproduct')}}" method="POST" class="form-horizontal">
+        <form action="{{ url('admin/product/new')}}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
         <!-- Task Name -->

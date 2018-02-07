@@ -13,4 +13,5 @@ class Product extends Model
     {
         return $this->belongsTo(Provider::class);
     }
+
 }

@@ -39,4 +39,38 @@ class PaymentService
         $this->paymentRepository->paymentAdd($payment);
         return $payment;
     }
+
+    public function getByFilter($startDate, $endDate, $status, $paymentId)
+    {
+        $payments = $this->paymentRepository->getAll();
+        $startDate .= ' 00:00:00';
+        $endDate .= ' 23:59:59';
+        $payments = $payments->where('created_at', '>=', $startDate);
+        $payments = $payments->where('created_at', '<=', $endDate);
+        if ($status != 0) {
+            $payments = $payments->where('status', '=', $status);
+        }
+        if (!empty($paymentId)) {
+            $payments = $payments->where('payment_id', '=', $paymentId);
+        }
+
+        return $payments;
+    }
+
+    public function addByCart($paymentIdGenerate, $paymentStatus, $carts)
+    {
+        $paymentPrice = 0;
+
+        foreach($carts as $cart) {
+            $paymentPrice += $cart->product->price;
+        }
+
+        $payment = new Payment();
+        $payment->payment_id = $paymentIdGenerate;
+        $payment->status = $paymentStatus;
+        $payment->total = $paymentPrice;
+
+        $this->paymentRepository->paymentAdd($payment);
+        return $payment;
+    }
 }

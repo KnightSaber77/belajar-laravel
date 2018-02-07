@@ -4,7 +4,7 @@
     <div class="panel-body">
         <h1 align = "center">Add Admin</h1> <br>
         <!-- New Task Form -->
-        <form action="{{ url('createnewadmin')}}" method="POST" class="form-horizontal">
+        <form action="{{ url('/admin/user/new')}}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
         <!-- Task Name -->

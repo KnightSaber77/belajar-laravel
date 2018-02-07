@@ -1,6 +1,14 @@
-@extends('app')
+@extends('apphome')
 
 @section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <a href="https://placeholder.com"><img src="http://via.placeholder.com/1200x150"></a>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -17,7 +25,7 @@
 
                     <br>
                     <div class="panel-body">
-                        <form action="{{ url('addtransaction')}}" method="GET" class="form-horizontal">
+                        <form id="formadd" action="{{ url('addtocart')}}" method="GET" class="form-horizontal">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="nomor_hp" class="col-sm-3 control-label">Phone Number</label>
@@ -31,12 +39,14 @@
                                 <div class="col-sm-offset-3 col-sm-6">
                                     <input class="tipe" type="radio" name="tipe" id="tipe" value="1" checked="checked">Pulsa &ensp;
                                     <input class="tipe" type="radio" name="tipe" id="tipe" value="2">Data &ensp;&ensp;
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fa"></i>Buy
-                                    </button>
                                 </div>
                             </div>
                         </form>
+                        <a href="cart">
+                            <button  class="btn btn-success btn-block">
+                                Check Cart
+                            </button>
+                        </a>
                     </div>
                 </div>
                 <div class="panel panel-default panel-table">
@@ -93,12 +103,13 @@
         function saveProductCode(code) {
             const productCodeInput = $('#product_code');
             productCodeInput.val(code);
-            alert('Product Ditambahkan');
+            document.getElementById("formadd").submit();
+            alert('Produk Ditambahkan');
         }
 
         function populateProducts(data) {
             const dataArray = JSON.parse(data);
-            console.log(JSON.stringify(dataArray, 0, 4));
+            //console.log(JSON.stringify(dataArray, 0, 4));
 
             const tableElement = $('#table_products');
             tableElement.find('tr').remove();
@@ -110,15 +121,7 @@
                 const price = row.price;
                 const tipe = row.tipe;
 
-                const tdcog =
-                    "<td align=\"center\">" +
-                    "<form action=\"{{ url('addtransaction') }}\" method=\"GET\">" +
-                        "<button type=\"submit\" class=\"btn btn-default\">" +
-                            "<a><em class=\"fa fa-plus\"></em></a>" +
-                        "</button>" +
-                    "</form>"+
 
-                "</td>";
                 const tdAdd = "<td align=\"center\">" +
                     "<button onclick=\"saveProductCode('"+code+"')\" class=\"btn btn-default\">" +
                     "<a><em class=\"fa fa-plus\"></em></a>" +

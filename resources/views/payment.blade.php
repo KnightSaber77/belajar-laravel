@@ -1,4 +1,4 @@
-@extends('app')
+@extends('apphome')
 
 @section('content')
     <div class="container">
@@ -9,53 +9,65 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col col-xs-6">
-                                <h2 align="center" class="panel-title">Transaction Detail - {{ $payment_id }}</h2>
+                                <h2 align="center" class="panel-title">Your Cart Now</h2>
                             </div>
 
                         </div>
                     </div>
                 </div>
 
+                <?php
+                    $totalPrice = 0;
+                ?>
                 <table id="cart" class="table table-hover table-condensed">
                     <thead>
                     <tr>
                         <th style="width:50%">Product</th>
-                        <th style="width:25%">Price</th>
+                        <th style="width:20%">Price</th>
                         <th></th>
-                        <th style="width:25%" class="text-center">Subtotal</th>
-                        <th></th>
+                        <th style="width:20%" class="text-center">Subtotal</th>
+                        <th style="width:10%"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td data-th="Product">
-                            <div class="row">
-                                <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
-                                <div class="col-sm-10">
-                                    <h4 class="nomargin">Product 1</h4>
-                                    <p>{{ $product->product_code }} untuk nomor HP {{ $nomor_hp }}</p>
+                    @foreach ($carts as $cart)
+                        <tr>
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                                    <div class="col-sm-10">
+                                        <h4 class="nomargin">Product</h4>
+                                        <p>{{ $cart->product_code  }} untuk nomor HP {{ $cart->nomor_hp }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td data-th="Price">{{ $product->price }}</td>
-                        <td></td>
-                        <td data-th="Subtotal" class="text-center">{{ $product->price }}</td>
-                    </tr>
+                            </td>
+
+                            <td data-th="Price">{{ $cart->product->price }}</td>
+                            <td></td>
+                            <td data-th="Subtotal" class="text-center">{{ $cart->product->price  }}</td>
+                            <?php
+                                $totalPrice += $cart->product->price;
+                            ?>
+                            <td class="actions" data-th="">
+                                <form action="{{ url('cart/delete/'.$cart->id) }}" method="POST">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                     <tfoot>
                     <tr class="visible-xs">
-                        <td class="text-center"><strong>Total {{ $product->price }}</strong></td>
+                        <td class="text-center"><strong>Total {{ $totalPrice }}</strong></td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total {{ $product->price }}</strong></td>
+                        <td class="hidden-xs text-center"><strong>Total {{ $totalPrice }}</strong></td>
                         <td>
-                            <form action="{{url('checkout')}}" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="product_code" id=product_code" value="{{ $product->product_code }}">
-                                <input type="hidden" name="nomor_hp" id="nomor_hp" value="{{ $nomor_hp }}">
-                                <input type="hidden" name="payment_id" id="payment_id" value="{{ $payment_id }}">
+                            <form action="{{url('checkout')}}" method="get">
                                 <button type="submit" class="btn btn-success btn-block"> Checkout <i class="fa fa-angle-right"></i>
                                 </button>
                             </form>

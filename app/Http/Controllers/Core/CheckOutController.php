@@ -8,12 +8,15 @@
 
 namespace App\Http\Controllers\Core;
 
+use App\Core\Models\Cart;
 use App\Core\Models\Payment;
 use App\Core\Models\Transaction;
+use App\Core\Models\Product;
 use App\Core\Services\ProductService;
 use App\Core\Services\ProviderService;
 use App\Core\Services\TransactionService;
 use App\Core\Services\PaymentService;
+use App\Core\Services\CartService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -23,6 +26,7 @@ class CheckOutController extends Controller
     private $productService;
     private $providerService;
     private $paymentService;
+    private $cartService;
 
     public function __construct()
     {
@@ -30,6 +34,7 @@ class CheckOutController extends Controller
         $this->providerService = new ProviderService();
         $this->transactionService = new TransactionService();
         $this->paymentService = new PaymentService();
+        $this->cartService = new CartService();
     }
 
     public function showHome()
@@ -41,29 +46,26 @@ class CheckOutController extends Controller
 
     public function transactionCart(Request $request)
     {
-        $data['product'] = $this->productService->getOne($request->input('product_code'));
-        $data['payment_id'] = strtoupper(str_random(8));
-        $data['nomor_hp'] = $request->input('nomor_hp');
-
+        $carts = $this->cartService->getAll();
+        $data['carts'] = $carts;
         return view('payment', $data);
     }
 
-    public function checkOut(Request $request)
+    public function checkOut()
     {
-        $product = $this->productService->getOne($request->input('product_code'));
+        $carts = $this->cartService->getAll();
 
-        $paymentId = $request->input('payment_id');
-        $nomorHp = $request->input('nomor_hp');
-        $productName = $request->input('product_code');
+        $paymentIdGenerate = strtoupper(str_random(8));
         $paymentStatus = Payment::STATUS_PENDING;
-        $transactionStatus = Transaction::STATUS_PENDING;
-        $price = $product->price;
 
-        $payment = $this->paymentService->paymentAdd($paymentId, $paymentStatus, $price);
-        $transaction = $this->transactionService->transactionAdd($paymentId, $nomorHp, $productName, $transactionStatus, $price);
+        $payment = $this->paymentService->addByCart($paymentIdGenerate, $paymentStatus, $carts);
 
-        $data['transaction'] = $transaction;
+        $this->transactionService->transactionAddAll($paymentIdGenerate, $carts);
+
+        $data['transactions'] = Transaction::where('payment_id', '=', $paymentIdGenerate);
         $data['payment'] = $payment;
+
+        $this->cartService->cartDeleteAll();
 
         return view('transfer', $data);
     }

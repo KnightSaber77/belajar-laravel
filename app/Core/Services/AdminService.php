@@ -36,7 +36,7 @@ class AdminService
         $admin->password = $password;
         $admin->description = $description;
 
-        $this->adminRepository->adminAdd($admin, $request);
+        $this->adminRepository->adminAdd($admin);
     }
 
     public function adminEdit($admin, $request)

@@ -32,4 +32,17 @@ class TransactionService
         $this->transactionRepository->transactionAdd($transaction);
         return $transaction;
     }
+
+    public function transactionAddAll($paymentIdGenerate, $carts)
+    {
+        foreach($carts as $cart) {
+            $paymentId = $paymentIdGenerate;
+            $nomorHp = $cart->nomor_hp;
+            $productName = $cart->product_code;
+            $transactionStatus = Transaction::STATUS_PENDING;
+            $price = $cart->product->price;
+
+            $this->transactionAdd($paymentId, $nomorHp, $productName, $transactionStatus, $price);
+        }
+    }
 }
