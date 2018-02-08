@@ -16,6 +16,7 @@ use App\Core\Services\ProductService;
 use App\Core\Services\ProviderService;
 use App\Core\Services\TransactionService;
 use App\Core\Services\PaymentService;
+use App\Core\Services\BannerService;
 use App\Core\Services\CartService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class CheckOutController extends Controller
     private $providerService;
     private $paymentService;
     private $cartService;
-
+    private $bannerService;
     public function __construct()
     {
         $this->productService = new ProductService();
@@ -35,12 +36,14 @@ class CheckOutController extends Controller
         $this->transactionService = new TransactionService();
         $this->paymentService = new PaymentService();
         $this->cartService = new CartService();
+        $this->bannerService = new BannerService();
     }
 
     public function showHome()
     {
         $data['products'] = $this->productService->getAll();
         $data['providers'] = $this->providerService->getAll();
+        $data['banners'] = $this->bannerService->getAll();
         return view('home', $data);
     }
 
