@@ -1,13 +1,51 @@
 @extends('apphome')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+    <section class="section-white">
+        <div class="container">
             <div class="col-md-10 col-md-offset-1">
-                <a href="https://placeholder.com"><img src="http://via.placeholder.com/1200x150"></a>
+                <div class="row">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="banner_pulta/pulta.png" alt="...">
+                                <div class="carousel-caption">
+                                    <h2>Welcome To Pulta</h2>
+                                </div>
+                            </div>
+                            @foreach ($banners as $banner)
+                                <div class="item">
+                                    <img src={{ $banner->path }} alt="...">
+                                    <div class="carousel-caption">
+                                        <h2>{{ $banner->name }}</h2>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+
+    </section>
 
     <div class="container">
         <div class="row">
